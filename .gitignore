@@ -1,0 +1,35 @@
+# Private inputs, credentials, and local results
+data/
+results/
+backtest-results/
+.env*
+!.env.example
+!.env.sample
+*token*.json
+*credentials*.json
+*.pem
+*.key
+*.parquet
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Build outputs and caches
+target/
+node_modules/
+dist/
+coverage/
+.vite/
+.cache/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Machine-specific agent/editor settings
+.codex/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
