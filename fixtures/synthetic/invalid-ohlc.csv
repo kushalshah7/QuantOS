@@ -1,0 +1,2 @@
+symbol,exchange,interval,ts_utc_ms,open,high,low,close,volume,source
+SYNTH,TEST,5m,0,100,98,99,102,10,synthetic
