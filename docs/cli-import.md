@@ -50,11 +50,11 @@ exact shapes; all shown properties required, no extra wrappers/partial candles.
 Normalization completion (outer status equals nested status, all values forwarded):
 
 ```json
-{"schema_version":"1","status":"success","stage":"normalization","result":{"schema_version":"1","status":"success","metadata":{},"issues":[],"gap_assessment":{"status":"not_performed","missing_ts_utc_ms":[]},"candles":[]}}
+{"schema_version":"1","status":"success","stage":"normalization","result":{"schema_version":"1","status":"success","metadata":{"source":"synthetic","synthetic":true,"adjustment_status":"unknown","redistribution_status":"unknown"},"issues":[],"gap_assessment":{"status":"not_performed","missing_ts_utc_ms":[]},"candles":[{"symbol":"SYNTH","exchange":"TEST","interval":"5m","ts_utc_ms":0,"open":10000,"high":10300,"low":9900,"close":10200,"volume":10,"source":"synthetic"}]}}
 ```
 
 The nested value is the exact NormalizationResultV1, including failure results;
-the object above illustrates the outer shape, not valid example domain metadata.
+the example above represents one invented candle, not an executed local import.
 CSV failure does not invoke normalization:
 
 ```json

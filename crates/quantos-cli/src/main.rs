@@ -1,5 +1,15 @@
-//! Phase 0 CLI skeleton; only displays the shared foundation status.
+//! Native foundation status and bounded CSV import; domain behavior stays in core.
 
-fn main() {
-    println!("{}", quantos_core::foundation_status());
+mod command;
+mod config;
+mod output;
+
+fn main() -> std::process::ExitCode {
+    let outcome = command::run(std::env::args_os().skip(1).collect());
+    let code = output::emit(
+        &mut std::io::stdout().lock(),
+        &mut std::io::stderr().lock(),
+        outcome,
+    );
+    std::process::ExitCode::from(code)
 }

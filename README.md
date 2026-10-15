@@ -7,6 +7,10 @@ This repository starts at Phase 0: architecture and a tested foundation only.
 Data import, backtesting, charts, broker integrations, and deployment require
 separate approved tasks. No market datasets or broker credentials belong here.
 
+Native CSV import is now available through `quantos-cli import`; see the
+[CLI interface and synthetic personal-machine example](docs/cli-import.md).
+The JSON report intentionally contains the imported candles/provenance.
+
 Start with [START_HERE.md](START_HERE.md). Coding agents follow [AGENTS.md](AGENTS.md),
 [CODEX_PROTOCOL.md](CODEX_PROTOCOL.md), and the approved card in `docs/tasks/`.
 Git and CI rules are in [GIT_WORKFLOW.md](GIT_WORKFLOW.md) and

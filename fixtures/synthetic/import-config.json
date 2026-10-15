@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "metadata": {
+    "source": "synthetic",
+    "synthetic": true,
+    "adjustment_status": "unknown",
+    "redistribution_status": "unknown"
+  },
+  "options": {
+    "timestamp_column": "ts_utc_ms",
+    "timestamp_format": "utc_ms",
+    "confirmed_timezone": null,
+    "expected_timestamps_utc_ms": null
+  }
+}

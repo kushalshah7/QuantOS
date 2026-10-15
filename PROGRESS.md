@@ -109,7 +109,12 @@
 - That task added no CSV parsing, WASM/browser normalization binding, CLI command,
   release or deployment. Its acceptance is limited to the approved P1 subtask.
 
-## QOS-0004 / P1 CSV parser and pipeline — REVIEW (owner acceptance pending)
+## QOS-0004 / P1 CSV parser and pipeline — ACCEPTED
+
+- Owner accepted head `5200238d6b7faf5a8d7d45c6703b2ebbc7f4e728`; PR #4
+  squash-merged through protections as `46679d2f6ce069513a7b0efd845d10770be27a04`.
+  Exact head/current checks/conversations/gates verified; local develop safely
+  fast-forwarded with untracked prompt content preserved. No P1-wide acceptance.
 
 - Required remote base/PR #3 merge verified as `a38ddfbb998f855faf8a12480d60761c44d1755c`.
   Clean isolated branch `feature/qos-0004-csv-parser`; task card and locked CSV
@@ -122,7 +127,7 @@
   check succeeded; staged diff check exited 0; scoped sensitive-pattern inspection
   found no matching filenames. No local compilation, runtime tests or installation.
 - Verified implementation checkpoint `1ca06457830e036d8fb31982e98bc9ac35f5a333`;
-  [PR #4](https://github.com/kushalshah7/QuantOS/pull/4) targets develop, unmerged.
+  [PR #4](https://github.com/kushalshah7/QuantOS/pull/4) targeted develop and is merged.
   [Push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38714803613) and
   [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38714949929) passed.
   Actual Rust test output inspected: CSV/pipeline 30 passed, normalization 20
@@ -132,4 +137,19 @@
   WASM runtime parity NOT RUN; WASM evidence is target compilation only.
 - No dependency/manifest/lock/toolchain/workflow change, combined public import
   entry point, file IO, CLI/browser work, release, deployment or P1 acceptance.
-  Stop at one PR to develop, before merge or another task.
+  That task stopped at review; QOS-0005 is separately authorized.
+
+## QOS-0005 / Native CLI import — IN PROGRESS
+
+- Exact required base/accepted PR #4 merge `46679d2f6ce069513a7b0efd845d10770be27a04`
+  verified; isolated branch `feature/qos-0005-cli-import`. Card/interface pushed
+  first as `1f9f8e5`; original checkout/owner files untouched.
+- Private native argument/config/read/report/output helpers compose unchanged
+  core APIs; duplicate JSON rejection, bounded reads, sanitized operational
+  reports and injected writer tests. New subprocess import suite/synthetic config.
+- CLI serde 1.0.229 (derive)/serde_json 1.0.154 reuse locked packages. OFFLINE
+  resolution reported zero package changes; only CLI dependency edges permitted.
+- Local compilation/tests/builds/CLI execution NOT RUN (LOW-RESOURCE); existing
+  pinned rustfmt succeeded. Runtime evidence awaits existing CI.
+- No public combined-import/core changes, real data, broker/network feature,
+  browser/WASM import, release or deployment. Stop at PR review, not P1 acceptance.
