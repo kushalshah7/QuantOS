@@ -1,4 +1,6 @@
-//! Shared native/WASM boundary. Domain logic is reserved for approved later tasks.
+//! Shared foundation boundary and approved core data normalization.
+
+pub mod data;
 
 /// Describes the foundation without claiming that an engine exists.
 pub const FOUNDATION_STATUS: &str = "QuantOS P0 foundation; market functionality unavailable";
