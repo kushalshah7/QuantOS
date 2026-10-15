@@ -74,10 +74,13 @@
 - Local test/build/toolchain checks NOT RUN (LOW-RESOURCE); macOS NOT RUN.
   Manual schema/golden arithmetic review completed; scoped sensitive-pattern
   inspection found no matching filenames; staged diff check exited 0.
-- CI provides unchanged-skeleton regression evidence only. It does not validate
-  documentation arithmetic, execute the golden cases or prove a normalizer exists.
+- At the QOS-0002 documentation checkpoint, CI provided unchanged-skeleton
+  regression evidence only; it did not execute goldens or prove a normalizer.
+  Subsequent QOS-0003–0005 runtime evidence is linked in the P1 packet below;
+  Markdown arithmetic remains outside CI's proof.
 - No known unresolved contract finding. P1 as a whole was not accepted or
-  implemented by that documentation checkpoint. QOS-0003 is separately authorized.
+  implemented by that documentation checkpoint. QOS-0003 subsequently implemented
+  the normalization API under its separately approved scope.
 
 ## QOS-0003 / P1 Rust normalizer — ACCEPTED
 
@@ -133,13 +136,24 @@
   Actual Rust test output inspected: CSV/pipeline 30 passed, normalization 20
   passed, P0 fixture/CLI tests passed; final-handoff head/checks/test evidence
   recorded in PR #4. Parser success remains separate from domain validity.
-- No known functional blocker; owner review pending. macOS and browser/native-
+- No known functional blocker after owner acceptance. macOS and browser/native-
   WASM runtime parity NOT RUN; WASM evidence is target compilation only.
 - No dependency/manifest/lock/toolchain/workflow change, combined public import
   entry point, file IO, CLI/browser work, release, deployment or P1 acceptance.
   That task stopped at review; QOS-0005 is separately authorized.
 
-## QOS-0005 / Native CLI import — REVIEW (owner acceptance pending)
+## QOS-0005 / Native CLI import — ACCEPTED
+
+- Owner accepted head `a393e59aaae05ca9f53c1b7fd6522269e90f0022` on 2026-10-15.
+  [PR #5](https://github.com/kushalshah7/QuantOS/pull/5) squash-merged through
+  GitHub as `0568b5ec5b77e23e484baee012156557a81d8236`; exact accepted head,
+  required checks, conversations and clean protection gate rechecked; no bypass.
+  Local develop fast-forwarded with owner files preserved. This accepts QOS-0005,
+  not aggregate P1. GitHub merge/head metadata independently rechecked for QOS-0006.
+- Post-merge [CI run](https://github.com/kushalshah7/QuantOS/actions/runs/38727027369)
+  succeeded at that exact merge SHA, both required jobs green. Actual Rust output
+  shows import 11, output units 2, CSV/pipeline 30, normalization 20 and existing
+  CLI smoke/fixture/adapter tests passed; WASM target compilation also passed.
 
 - Exact required base/accepted PR #4 merge `46679d2f6ce069513a7b0efd845d10770be27a04`
   verified; isolated branch `feature/qos-0005-cli-import`. Card/interface pushed
@@ -154,7 +168,8 @@
   sensitive-pattern inspection found no matching filenames. No registry refresh.
 - Verified functional checkpoint `50c8ce86217e9a578d794b09e21345c0eeaba38d` after
   one pinned-Clippy iteration fix; [PR #5](https://github.com/kushalshah7/QuantOS/pull/5)
-  targets develop, unmerged. [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38722026976)
+  targeted develop and is now merged as recorded above. Historical checkpoint
+  [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38722026976)
   and [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38722020940)
   passed. Actual Rust output inspected: import 11, output writer units 2, unchanged
   CSV 30/normalization 20/P0 smoke passed. Final handoff SHA/checks/test execution
@@ -162,4 +177,27 @@
 - No known functional blocker. Reports intentionally contain requested user data.
   macOS/browser/native-WASM runtime parity NOT RUN; WASM compile is not parity proof.
 - No public combined-import/core changes, real data, broker/network feature,
-  browser/WASM import, release or deployment. Stop at PR review, not P1 acceptance.
+  browser/WASM import, release or deployment. Acceptance covers this native CLI
+  subtask only; aggregate P1 hands-on/reviewer requirements remain pending.
+
+## QOS-0006 / P1 acceptance evidence — REVIEW
+
+- Approved documentation-only task card pushed first as `e42371965f9dd83a2e542f22d9ebdec50e7dffd2`;
+  clean isolated `feature/qos-0006-p1-acceptance` starts at exact required
+  `0568b5ec5b77e23e484baee012156557a81d8236`. Original checkout/owner files untouched;
+  previous QOS-0005 prompt was already absent at preflight; current prompt preserved.
+- [P1 acceptance packet](docs/p1-acceptance.md): criterion-to-contract/test/actual-CI
+  evidence, accepted subtask trail, verification limits and future personal-machine
+  checklist. Current status prose corrected in the eight allowed documentation
+  paths; schemas, rules, golden tables, fixture/config bytes and runtime unchanged.
+- [PR #6](https://github.com/kushalshah7/QuantOS/pull/6) targets develop; documentation
+  checkpoint/final-head CI verification pending. Implementation-base Ubuntu CI
+  independently checked at the exact SHA above, including actual relevant output.
+- Local runtime compilation/tests/builds/CLI, installation, dependency resolution,
+  browser automation and dataset processing NOT RUN. Text/Git diff review only;
+  staged diff check passed. Existing code blocks/tables and locked contract/golden
+  bodies compared unchanged; every changed hunk reviewed within allowed prose.
+- Decision: READY FOR OWNER REVIEW. Personal-machine hands-on validation and written
+  owner acceptance remain pending; macOS and browser/native-WASM runtime parity
+  NOT RUN. No functional blocker found in this focused evidence audit. No P1-wide
+  acceptance, merge, release, deployment or P2 work authorized/performed.

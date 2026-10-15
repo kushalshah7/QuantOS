@@ -1,9 +1,11 @@
 # Candle normalization contract — schema 1
 
-Status: documentation specified by owner-approved QOS-0002. No parser or normalizer
-exists. The Rust/WASM/CLI interfaces in [api-contracts.md](api-contracts.md) remain
-P0 skeletons. [Golden cases](../fixtures/synthetic/normalization-cases.md) are
-hand-written specifications, not executed normalizer tests.
+Status: QOS-0002 specified this contract; QOS-0003 implemented Rust normalization,
+QOS-0004 added CSV parsing, and QOS-0005 exposes the native CLI. See
+[current interfaces](api-contracts.md) and the [P1 acceptance packet](p1-acceptance.md).
+[Golden cases](../fixtures/synthetic/normalization-cases.md) remain hand-written
+specifications; executable Rust tests transcribe their expectations. Browser/WASM
+import bindings are unimplemented, and aggregate P1 acceptance remains pending.
 
 ## Scope and units
 
@@ -279,7 +281,10 @@ exists until implementation and tests.
 Public examples are invented and explicitly synthetic. Private inputs stay under
 ignored `data/`; no broker credentials, licensed data or local backtest results
 belong in Git/CI logs/artifacts. Provenance does not grant redistribution rights.
-Existing P0 tests only check their fixture examples and skeleton interfaces.
-CI regression success does not validate this document's arithmetic, execute these
-normalization rules or prove that an importer/normalizer exists. Runtime behavior,
-dependencies and public bindings require another approved task.
+P0 fixture tests check example properties; the normalization/CSV suites and actual
+CLI subprocess tests now exercise the implemented data path. The acceptance packet
+links immutable tests and implementation-base Ubuntu CI output. CI runs Rust
+assertions, not this Markdown, and does not independently validate its arithmetic.
+Office-laptop runtime checks, personal-machine hands-on validation, macOS and
+browser/native-WASM runtime parity are NOT RUN; WASM evidence is compilation only.
+Provenance preserves declarations without verifying rights or adjustment accuracy.
