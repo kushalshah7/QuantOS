@@ -109,7 +109,7 @@
 - That task added no CSV parsing, WASM/browser normalization binding, CLI command,
   release or deployment. Its acceptance is limited to the approved P1 subtask.
 
-## QOS-0004 / P1 CSV parser and pipeline — IN PROGRESS
+## QOS-0004 / P1 CSV parser and pipeline — REVIEW (owner acceptance pending)
 
 - Required remote base/PR #3 merge verified as `a38ddfbb998f855faf8a12480d60761c44d1755c`.
   Clean isolated branch `feature/qos-0004-csv-parser`; task card and locked CSV
@@ -118,8 +118,18 @@
   present QOS-0004 prompt was hashed read-only for preservation verification.
 - CSV-only tagged API/six codes and new independent parser/pipeline tests;
   normalization implementation/types/codes/tests and accepted contracts intact.
-- Local tests/builds NOT RUN (LOW-RESOURCE). Existing pinned rustfmt permitted;
-  runtime CSV/pipeline and unchanged normalization/P0 evidence awaits CI.
+- Local tests/builds NOT RUN (LOW-RESOURCE). Existing pinned rustfmt/formatter
+  check succeeded; staged diff check exited 0; scoped sensitive-pattern inspection
+  found no matching filenames. No local compilation, runtime tests or installation.
+- Verified implementation checkpoint `1ca06457830e036d8fb31982e98bc9ac35f5a333`;
+  [PR #4](https://github.com/kushalshah7/QuantOS/pull/4) targets develop, unmerged.
+  [Push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38714803613) and
+  [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38714949929) passed.
+  Actual Rust test output inspected: CSV/pipeline 30 passed, normalization 20
+  passed, P0 fixture/CLI tests passed; final-handoff head/checks/test evidence
+  recorded in PR #4. Parser success remains separate from domain validity.
+- No known functional blocker; owner review pending. macOS and browser/native-
+  WASM runtime parity NOT RUN; WASM evidence is target compilation only.
 - No dependency/manifest/lock/toolchain/workflow change, combined public import
   entry point, file IO, CLI/browser work, release, deployment or P1 acceptance.
   Stop at one PR to develop, before merge or another task.

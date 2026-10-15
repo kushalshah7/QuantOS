@@ -108,10 +108,24 @@ CLI, WASM and web. No dependencies, private data or public combined-import API.
 - No merge/release/deployment, CLI/browser work, P1 acceptance or another task.
 
 ## Handoff (Codex fills after work)
-- Status: NOT STARTED
-- Changed paths:
-- Local tests/builds: NOT RUN (LOW-RESOURCE).
-- CI / CSV-pipeline execution evidence:
-- Remote commit SHA:
-- PR link:
-- Remaining risks / owner review:
+- Status: REVIEW (implementation delivered; owner acceptance pending)
+- Changed paths: approved data-module declarations, CSV module and new CSV test/
+  support files, CSV/API contracts, module router, this card and PROGRESS only.
+  Normalizer, existing tests/fixtures, manifests/lockfile/workflow unchanged.
+- Local tests/builds: NOT RUN (LOW-RESOURCE). Existing pinned rustfmt/formatter
+  check succeeded; staged diff check exited 0; sensitive-pattern inspection found
+  no matching filenames. No compilation, test execution or installation locally.
+- CI / CSV-pipeline execution evidence: implementation-head
+  [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38714803613) and
+  [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38714949929) passed.
+  Actual [Rust log](https://github.com/kushalshah7/QuantOS/actions/runs/38714803613/job/116354776582)
+  inspected: tests/csv.rs 30 passed; tests/normalization.rs 20 passed; P0 fixture/
+  CLI tests passed. CSV01–CSV12, focused edges and all pipeline tests ran.
+  Final handoff head/CI and actual final-head test output are recorded in PR #4.
+- Remote commit SHA: verified implementation checkpoint
+  `1ca06457830e036d8fb31982e98bc9ac35f5a333`; subsequent handoff's final SHA is
+  recorded in PR #4 to avoid self-referential commit hashes.
+- PR link: https://github.com/kushalshah7/QuantOS/pull/4 -> develop; unmerged.
+- Remaining risks / owner review: no known functional blocker; owner acceptance
+  pending, not P1 acceptance. macOS/browser/native-WASM runtime parity NOT RUN.
+  Original checkout is not edited; prompt availability at preflight is above.
