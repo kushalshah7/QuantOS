@@ -49,14 +49,28 @@
 - Blockers: none after the owner-authorized Windows exception. Local checks
   during acceptance: NOT RUN; macOS remains NOT RUN.
 
-## QOS-0002 / P1 normalization contract — IN PROGRESS
+## QOS-0002 / P1 normalization contract — REVIEW (owner acceptance pending)
 
 - Owner approved documentation-only work on 2026-10-15; branch
   `feature/qos-0002-data-contract` starts at accepted P0 squash commit above.
 - Task card created first and pushed as checkpoint `e5654d5`. Scope is exactly
   the card, data contract, golden specification, fixture README and this handoff.
-- Contract/golden documentation in progress; no normalizer, runtime API,
-  dependency, CI change or private dataset introduced.
-- Local test/build checks NOT RUN (LOW-RESOURCE); existing Actions will provide
-  regression evidence only, not documentation arithmetic/normalizer proof.
+- Delivered schema-1 typed contract, exact decimal-to-paise/time rules, stable
+  issues, atomic validation, declared provenance and explicit-grid-only gaps,
+  plus hand-written golden cases. No normalizer, runtime API, dependency, CI
+  change or private dataset introduced.
+- Verified pushed contract checkpoint `004e82028d23ad4dad25f9deed0777065bacaf4e`;
+  [PR #2](https://github.com/kushalshah7/QuantOS/pull/2) targets `develop` and remains
+  unmerged. This later documentation handoff is reflected by its final PR head.
+- Contract-checkpoint [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38689582552)
+  and [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38689620700)
+  succeeded; both quality jobs and all PR job steps passed. Final-handoff CI is
+  recorded in PR checks/description.
+- Local test/build/toolchain checks NOT RUN (LOW-RESOURCE); macOS NOT RUN.
+  Manual schema/golden arithmetic review completed; scoped sensitive-pattern
+  inspection found no matching filenames; staged diff check exited 0.
+- CI provides unchanged-skeleton regression evidence only. It does not validate
+  documentation arithmetic, execute the golden cases or prove a normalizer exists.
+- No known unresolved contract finding; owner review required. P1 as a whole is
+  not accepted or implemented by this documentation checkpoint.
 - Stop at the QOS-0002 PR review gate; no further merge or runtime work authorized.

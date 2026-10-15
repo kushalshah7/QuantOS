@@ -99,9 +99,20 @@ No other files, runtime code, dependencies, lockfiles, workflow changes or datas
   request an amendment. Do not invent financial or calendar behavior.
 
 ## Handoff (Codex fills after work)
-- Status: NOT STARTED
-- Paths changed:
-- Tests/results: local test/build checks NOT RUN (LOW-RESOURCE).
-- Remote commit SHA:
-- PR link:
-- Risks / next decision: owner review; runtime implementation requires a new task.
+- Status: REVIEW (documentation delivered; owner acceptance pending)
+- Paths changed: this card, `docs/data-contract.md`,
+  `fixtures/synthetic/normalization-cases.md`, `fixtures/synthetic/README.md`,
+  `PROGRESS.md` only.
+- Tests/results: local test/build/toolchain checks NOT RUN (LOW-RESOURCE);
+  manual schema/golden arithmetic and sensitive-pattern review completed;
+  `git diff --cached --check` exited 0. No runtime normalization tests exist.
+- Remote commit SHA: verified contract checkpoint
+  `004e82028d23ad4dad25f9deed0777065bacaf4e`; this subsequent handoff commit's
+  final head and final-head CI are recorded in PR #2.
+- PR link: https://github.com/kushalshah7/QuantOS/pull/2 -> `develop` (unmerged).
+- CI: contract-checkpoint [push run](https://github.com/kushalshah7/QuantOS/actions/runs/38689582552)
+  and [PR run](https://github.com/kushalshah7/QuantOS/actions/runs/38689620700)
+  succeeded; `rust-quality` and `web-quality` steps independently inspected.
+  CI does not validate documentation arithmetic or prove a normalizer exists.
+- Risks / next decision: no known unresolved contract finding; owner review
+  required. Runtime implementation requires a new task; macOS NOT RUN.
