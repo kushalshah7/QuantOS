@@ -101,14 +101,17 @@ small relevant CI output sections needed to support the acceptance packet.
 
 ## Handoff (Codex fills after work)
 
-- Status: REVIEW; packet READY FOR OWNER REVIEW, documentation-head CI pending.
+- Status: REVIEW; packet READY FOR OWNER REVIEW. Final handoff head/checks are
+  recorded in PR #6; no merge or aggregate P1 acceptance authorized.
 - Paths changed: exactly the eight allowed documentation paths above; immutable
   existing code blocks/tables, contract/golden bodies and all runtime files unchanged.
 - Tests/results: implementation-base CI independently checked; import 11, output
   units 2, CSV/pipeline 30 and normalization 20 passed. Text comparison and staged
-  diff check passed; local runtime/manual/macOS/parity checks NOT RUN.
+  diff check passed. Documentation-checkpoint PR/push CI both passed
+  (`38734394025` / `38734383183`); local runtime/manual/macOS/parity checks NOT RUN.
 - Remote commit SHA: approved card pushed first as
-  `e42371965f9dd83a2e542f22d9ebdec50e7dffd2`; documentation checkpoint pending.
-- PR link: https://github.com/kushalshah7/QuantOS/pull/6 (develop; draft until CI).
+  `e42371965f9dd83a2e542f22d9ebdec50e7dffd2`; verified documentation checkpoint
+  `307f8ff9086aa0992dbaa73286b6bdc890858ff8`. Subsequent handoff SHA is the PR head.
+- PR link: https://github.com/kushalshah7/QuantOS/pull/6 (develop; owner review required).
 - Risks / next decision: personal-machine hands-on validation and written owner
   acceptance remain pending; this task does not waive either gate.

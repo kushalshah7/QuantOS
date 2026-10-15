@@ -190,9 +190,15 @@
   evidence, accepted subtask trail, verification limits and future personal-machine
   checklist. Current status prose corrected in the eight allowed documentation
   paths; schemas, rules, golden tables, fixture/config bytes and runtime unchanged.
-- [PR #6](https://github.com/kushalshah7/QuantOS/pull/6) targets develop; documentation
-  checkpoint/final-head CI verification pending. Implementation-base Ubuntu CI
-  independently checked at the exact SHA above, including actual relevant output.
+- Verified pushed documentation checkpoint `307f8ff9086aa0992dbaa73286b6bdc890858ff8`;
+  [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38734394025) and
+  [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38734383183) both
+  passed rust-quality/web-quality on that head. Final handoff head/checks are
+  recorded in [PR #6](https://github.com/kushalshah7/QuantOS/pull/6), targeting develop.
+  Implementation-base Ubuntu CI independently checked at the exact base SHA above,
+  including actual relevant output. Documentation CI is regression evidence;
+  it does not validate Markdown arithmetic, prove manual usability or replace
+  hands-on/reviewer acceptance.
 - Local runtime compilation/tests/builds/CLI, installation, dependency resolution,
   browser automation and dataset processing NOT RUN. Text/Git diff review only;
   staged diff check passed. Existing code blocks/tables and locked contract/golden
