@@ -49,7 +49,12 @@
 - Blockers: none after the owner-authorized Windows exception. Local checks
   during acceptance: NOT RUN; macOS remains NOT RUN.
 
-## QOS-0002 / P1 normalization contract — REVIEW (owner acceptance pending)
+## QOS-0002 / P1 normalization contract — ACCEPTED
+
+- Owner accepted head `379f688da0c807cbed8f62b1f6895363f405f31d` on 2026-10-15.
+  PR #2 was squash-merged through the protected gate as
+  `452bde68a8e96210919be97bf0cdd78dea53700c`; head unchanged, required checks
+  green, no unresolved conversations or bypass. Local develop was fast-forwarded.
 
 - Owner approved documentation-only work on 2026-10-15; branch
   `feature/qos-0002-data-contract` starts at accepted P0 squash commit above.
@@ -61,7 +66,7 @@
   change or private dataset introduced.
 - Verified pushed contract checkpoint `004e82028d23ad4dad25f9deed0777065bacaf4e`;
   [PR #2](https://github.com/kushalshah7/QuantOS/pull/2) targets `develop` and remains
-  unmerged. This later documentation handoff is reflected by its final PR head.
+  accepted and squash-merged at the SHA above. Its accepted head is recorded above.
 - Contract-checkpoint [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38689582552)
   and [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38689620700)
   succeeded; both quality jobs and all PR job steps passed. Final-handoff CI is
@@ -71,6 +76,30 @@
   inspection found no matching filenames; staged diff check exited 0.
 - CI provides unchanged-skeleton regression evidence only. It does not validate
   documentation arithmetic, execute the golden cases or prove a normalizer exists.
-- No known unresolved contract finding; owner review required. P1 as a whole is
-  not accepted or implemented by this documentation checkpoint.
-- Stop at the QOS-0002 PR review gate; no further merge or runtime work authorized.
+- No known unresolved contract finding. P1 as a whole was not accepted or
+  implemented by that documentation checkpoint. QOS-0003 is separately authorized.
+
+## QOS-0003 / P1 Rust normalizer — REVIEW (owner acceptance pending)
+
+- Approved card created/pushed first as `1a9f724`; branch
+  `feature/qos-0003-core-normalizer` starts at exact required `origin/develop`
+  `452bde68a8e96210919be97bf0cdd78dea53700c` in a clean isolated checkout.
+  Owner's untracked instruction file in the original checkout is preserved.
+- Rust-only `data::normalize_v1` and typed Serialize results, independent golden
+  expectations, focused malformed/boundary/order cases and isolated TZ tests.
+  Foundation surfaces and accepted contract/goldens remain unchanged.
+- Exact dependencies resolved: serde 1.0.229 (derive), serde_json 1.0.154; seven
+  necessary packages added, with unrelated lock entries preserved.
+- Local tests/builds NOT RUN (LOW-RESOURCE). Existing pinned rustfmt and Cargo
+  lockfile resolution succeeded; staged diff check exited 0; scoped sensitive-
+  pattern inspection found no matching filenames.
+- Verified implementation checkpoint `ac7dcad49ca08a8f719e5511ff270d244b506f2a`;
+  [PR #3](https://github.com/kushalshah7/QuantOS/pull/3) targets develop, unmerged.
+  [Push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38695942990) passed;
+  actual Rust output shows `tests/normalization.rs`: 20 passed, 0 failed,
+  0 ignored, including golden groups, focused edges and isolated TZ subprocesses.
+  Final handoff SHA/checks and final-head suite output are recorded in PR #3.
+- No known unresolved implementation finding. WASM evidence is target compilation
+  only; browser/native-WASM result parity and macOS NOT RUN.
+- No CSV parsing, WASM/browser normalization binding, CLI command, release or
+  deployment. Stop at one PR to develop; implementation review is not P1 acceptance.
