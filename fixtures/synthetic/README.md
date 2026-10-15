@@ -8,6 +8,8 @@ These files contain no observations from a market, broker, or proprietary feed.
 - `invalid-ohlc.csv`: intentionally inconsistent high/low and open/close.
 - `duplicate-timestamp.csv`: intentionally repeated UTC timestamp.
 - `missing-timezone.csv`: intentionally lacks an offset/timezone.
+- `import-config.json`: explicit synthetic provenance/options for the native
+  [CLI import example](../../docs/cli-import.md); no private inputs or defaults.
 - [normalization-cases.md](normalization-cases.md): schema-1 hand-written input/
   expected-output cases for the owner-approved normalization contract, including
   exact paise/UTC arithmetic, validation, provenance and atomic failure.

@@ -6,7 +6,7 @@ The existing P0 build-stage interfaces remain unchanged:
 | --- | --- | --- |
 | Core Rust | `foundation_status() -> &'static str` | Static P0 status; no IO |
 | WASM adapter | `foundation_status() -> String` | Copies the core status; wasm-bindgen export |
-| Native CLI | `quantos-cli` | Prints the core status and a newline; exits successfully |
+| Native CLI | `quantos-cli` (no arguments) | Prints the core status and a newline; exits successfully |
 | Web | Static React page | Clearly labels P0 and unavailable market functionality |
 
 Status text: `QuantOS P0 foundation; market functionality unavailable`.
@@ -90,3 +90,29 @@ the unchanged normalization/P0 suites ran. QOS-0004 local tests/builds NOT RUN;
 existing pinned rustfmt and lightweight text/Git checks only. No dependencies,
 lockfile, toolchain or workflow changed. WASM remains compilation-only evidence;
 macOS and browser/native-WASM runtime parity NOT RUN. This is not P1 acceptance.
+
+## QOS-0005 native CLI import
+
+`quantos-cli import --csv <path> --config <path>` reads bounded native-path inputs,
+then calls the unchanged `parse_csv_v1` and, on parse success, `normalize_v1`.
+There is no new public library or core combined-import API. CLI-private Serialize
+reports wrap the exact core result; the complete command/config/report/exit and
+precedence contract is [cli-import.md](cli-import.md). No arguments retains the
+foundation status; sole --help prints static usage.
+
+Config root is exactly schema_version/metadata/options; child values/types pass
+unchanged to core. The private duplicate-rejecting JSON visitor retains default
+nesting limits. Reads are capped at config 1048576 and CSV 67108864 bytes,
+inclusive, using limit+1 rather than trusting metadata. All operational issues
+are sanitized fixed messages; requested normalized data/provenance remain in
+stdout. Reports serialize fully before stdout writes; output failures exit 3
+with a fixed stderr diagnostic and may leave partial stdout across a broken pipe.
+
+Only CLI serde 1.0.229 (derive) and serde_json 1.0.154 edges are added, reusing
+already locked packages. New subprocess tests use the actual built CLI with
+synthetic owned temporary files; output-write errors use an injected writer unit
+test. Existing CLI smoke/core suites are unchanged. Local tests/builds/CLI
+execution NOT RUN; only existing pinned rustfmt, OFFLINE lock resolution and
+text/Git checks are allowed. Final-head CI must prove new import tests ran.
+No real dataset validation, broker/network feature, WASM/browser import, release,
+deployment or P1-wide acceptance. macOS/browser/native-WASM runtime parity NOT RUN.

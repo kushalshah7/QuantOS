@@ -8,7 +8,7 @@ Open this before code exploration. Route to the **smallest** source area. Update
 | UTF-8 CSV bytes to exact field strings | `crates/quantos-core/src/data/csv.rs`; `tests/csv.rs`, `tests/csv_cases/` in that crate | `docs/csv-contract.md`, `docs/api-contracts.md` | `cargo test -p quantos-core --test csv --locked` (existing workspace CI discovers it) |
 | Strategy signals, fills, portfolio ledger | `crates/quantos-core/` (engine module) | `docs/backtest-semantics.md` | `cargo test -p quantos-core` |
 | Browser Rust bindings | `crates/quantos-wasm/` | `docs/api-contracts.md` | `cargo check -p quantos-wasm --target wasm32-unknown-unknown --locked`; browser packaging later |
-| Native/local research CLI | `crates/quantos-cli/` | `docs/api-contracts.md` | `cargo test -p quantos-cli` |
+| Native/local research CLI | `crates/quantos-cli/src/`, `tests/import.rs`, `tests/import_cases/` in that crate | `docs/cli-import.md`, `docs/api-contracts.md` | `cargo test -p quantos-cli --locked` |
 | UI and browser workers | `apps/web/` | `docs/api-contracts.md`, UI task card | root `npm run lint`, `npm run typecheck`, `npm test`, `npm run build` |
 | Independent math/data verification | `scripts/analytics/` | data/backtest contracts | Python test specified by task |
 | Future local private broker bridge | `services/local-bridge/` | explicit *future* broker spec | no live calls in default CI |
@@ -20,5 +20,6 @@ for already-parsed in-memory tables. P0 fixture tests still verify examples only
 the normalization integration suite tests the domain API. Rust-only
 `data::parse_csv_v1` separately parses CSV bytes, with test-only composition into
 normalization. Parser success does not assert valid market data. Native CLI
-commands and WASM/browser import bindings are not implemented; those surfaces
-retain their P0 behavior. This router does not authorize inspecting all paths.
+`import` composes these core APIs with explicit caller configuration and bounded
+read-only IO; no-argument status is preserved. WASM/browser import bindings remain
+unimplemented. This router does not authorize inspecting all paths.

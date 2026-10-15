@@ -46,6 +46,8 @@ name = "quantos-cli"
 version = "0.0.0"
 dependencies = [
  "quantos-core",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
