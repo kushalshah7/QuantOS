@@ -105,11 +105,24 @@ existing P0 tests, toolchain/workspace manifests, workflow, web, WASM and CLI.
 - No merge/release/deployment, CSV parsing, browser integration or next task.
 
 ## Handoff (Codex fills after work)
-- Status: NOT STARTED
-- Paths changed:
-- Dependency versions: registry candidates 1.0.229 / 1.0.154; resolution pending.
-- Local tests/builds: NOT RUN (LOW-RESOURCE).
-- CI / normalization execution evidence:
-- Remote commit SHA:
-- PR link:
-- Risks / next decision: implementation delivered for review, not P1 accepted.
+- Status: REVIEW (implementation delivered; owner acceptance pending)
+- Paths changed: approved core source/data helpers, new normalization integration
+  test/support files, core manifest and Cargo.lock, API contract, module router,
+  this card and PROGRESS only. Accepted data/golden contracts and P0 tests intact.
+- Dependency versions: exactly pinned serde 1.0.229 (derive), serde_json 1.0.154;
+  seven necessary additions, unrelated locked versions preserved.
+- Local tests/builds: NOT RUN (LOW-RESOURCE). Existing pinned rustfmt and approved
+  Cargo lockfile resolution exited 0; staged diff check exited 0; scoped sensitive-
+  pattern inspection found no matching filenames. No local compilation/test run.
+- CI / normalization execution evidence: implementation-head
+  [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38695942990) passed.
+  Actual [Rust job log](https://github.com/kushalshah7/QuantOS/actions/runs/38695942990/job/116292410984)
+  inspected: `Running tests/normalization.rs`, 20 passed, 0 failed, 0 ignored;
+  golden groups, focused edges and isolated host-timezone subprocess test all ran.
+  Final handoff head/CI and corresponding test output are recorded in PR #3.
+- Remote commit SHA: verified implementation checkpoint
+  `ac7dcad49ca08a8f719e5511ff270d244b506f2a`; this later documentation handoff's
+  exact final SHA is in PR #3 (avoids self-referential commit hashes).
+- PR link: https://github.com/kushalshah7/QuantOS/pull/3 -> develop; unmerged.
+- Risks / next decision: no known unresolved implementation finding; owner review
+  required, not P1 acceptance. macOS and browser/native-WASM parity NOT RUN.

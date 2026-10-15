@@ -22,13 +22,14 @@ Rust financial calculations. Do not invent a backtest request/result API in P0.
 ## QOS-0003 Rust-only normalization API
 
 ```rust
-pub fn quantos_core::data::normalize_v1(
+pub fn normalize_v1(
     input: &serde_json::Value,
 ) -> quantos_core::data::NormalizationResultV1;
 ```
 
 This is the sole new callable domain entry point. Its input is an in-memory JSON
 value containing an already-parsed CSV table, explicit options and provenance.
+Its public path is `quantos_core::data::normalize_v1`.
 It reports malformed/missing/unknown properties without strict deserialization
 discarding independently detectable errors. No CSV/JSON-text parsing, file IO,
 network access, host-timezone lookup, worker protocol or cancellation API is added.

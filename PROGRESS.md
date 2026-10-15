@@ -79,7 +79,7 @@
 - No known unresolved contract finding. P1 as a whole was not accepted or
   implemented by that documentation checkpoint. QOS-0003 is separately authorized.
 
-## QOS-0003 / P1 Rust normalizer — IN PROGRESS
+## QOS-0003 / P1 Rust normalizer — REVIEW (owner acceptance pending)
 
 - Approved card created/pushed first as `1a9f724`; branch
   `feature/qos-0003-core-normalizer` starts at exact required `origin/develop`
@@ -90,7 +90,16 @@
   Foundation surfaces and accepted contract/goldens remain unchanged.
 - Exact dependencies resolved: serde 1.0.229 (derive), serde_json 1.0.154; seven
   necessary packages added, with unrelated lock entries preserved.
-- Local tests/builds NOT RUN (LOW-RESOURCE). Existing pinned rustfmt succeeded;
-  Cargo lockfile resolution succeeded. Runtime verification awaits new-head CI.
+- Local tests/builds NOT RUN (LOW-RESOURCE). Existing pinned rustfmt and Cargo
+  lockfile resolution succeeded; staged diff check exited 0; scoped sensitive-
+  pattern inspection found no matching filenames.
+- Verified implementation checkpoint `ac7dcad49ca08a8f719e5511ff270d244b506f2a`;
+  [PR #3](https://github.com/kushalshah7/QuantOS/pull/3) targets develop, unmerged.
+  [Push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38695942990) passed;
+  actual Rust output shows `tests/normalization.rs`: 20 passed, 0 failed,
+  0 ignored, including golden groups, focused edges and isolated TZ subprocesses.
+  Final handoff SHA/checks and final-head suite output are recorded in PR #3.
+- No known unresolved implementation finding. WASM evidence is target compilation
+  only; browser/native-WASM result parity and macOS NOT RUN.
 - No CSV parsing, WASM/browser normalization binding, CLI command, release or
   deployment. Stop at one PR to develop; implementation review is not P1 acceptance.
