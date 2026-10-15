@@ -97,10 +97,25 @@ public library/combined-import API. Only new direct dependencies: serde exactly
   next task.
 
 ## Handoff
-- Status: NOT STARTED
-- Paths changed:
-- Local tests/builds/CLI execution: NOT RUN (LOW-RESOURCE).
-- Offline lock/formatter/diff evidence:
-- Final-head CI and actual import-suite evidence:
-- Remote SHA / PR:
-- Risks / owner review:
+- Status: REVIEW (implementation delivered; owner acceptance pending)
+- Paths changed: approved CLI source/private helpers, new import integration tests,
+  CLI manifest/two lockfile edges, synthetic config/reference, CLI/API/README/router/
+  card/progress documentation only. Existing smoke/core/contracts/workflow intact.
+- Local tests/builds/CLI execution: NOT RUN (LOW-RESOURCE). No installation,
+  registry refresh, historical-data processing or local example execution.
+- Offline lock/formatter/diff evidence: existing pinned Cargo --offline resolved
+  zero package changes; Cargo.lock diff is only CLI serde/serde_json edges. Exact
+  pins 1.0.229 (derive)/1.0.154. Pinned rustfmt and staged diff checks succeeded;
+  sensitive-pattern inspection found no matching filenames.
+- CI evidence: after one scoped pinned-Clippy argument-iteration fix,
+  [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38722026976) and
+  [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38722020940) passed.
+  Actual [Rust output](https://github.com/kushalshah7/QuantOS/actions/runs/38722026976/job/116378664707)
+  inspected: new import integration 11 passed; output writer units 2 passed;
+  existing CSV 30, normalization 20 and P0 smoke passed. Final-handoff head/CI
+  and final-head test output are recorded in PR #5.
+- Remote SHA: verified functional checkpoint
+  `50c8ce86217e9a578d794b09e21345c0eeaba38d`; later handoff's full SHA is in PR #5.
+- PR: https://github.com/kushalshah7/QuantOS/pull/5 -> develop; unmerged.
+- Risks / owner review: no known functional blocker; reports intentionally contain
+  requested data. macOS/browser/native-WASM parity NOT RUN; not P1 acceptance.

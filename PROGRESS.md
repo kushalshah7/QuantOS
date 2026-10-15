@@ -139,7 +139,7 @@
   entry point, file IO, CLI/browser work, release, deployment or P1 acceptance.
   That task stopped at review; QOS-0005 is separately authorized.
 
-## QOS-0005 / Native CLI import — IN PROGRESS
+## QOS-0005 / Native CLI import — REVIEW (owner acceptance pending)
 
 - Exact required base/accepted PR #4 merge `46679d2f6ce069513a7b0efd845d10770be27a04`
   verified; isolated branch `feature/qos-0005-cli-import`. Card/interface pushed
@@ -150,6 +150,16 @@
 - CLI serde 1.0.229 (derive)/serde_json 1.0.154 reuse locked packages. OFFLINE
   resolution reported zero package changes; only CLI dependency edges permitted.
 - Local compilation/tests/builds/CLI execution NOT RUN (LOW-RESOURCE); existing
-  pinned rustfmt succeeded. Runtime evidence awaits existing CI.
+  pinned rustfmt/offline lock resolution and staged diff checks succeeded; scoped
+  sensitive-pattern inspection found no matching filenames. No registry refresh.
+- Verified functional checkpoint `50c8ce86217e9a578d794b09e21345c0eeaba38d` after
+  one pinned-Clippy iteration fix; [PR #5](https://github.com/kushalshah7/QuantOS/pull/5)
+  targets develop, unmerged. [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/38722026976)
+  and [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38722020940)
+  passed. Actual Rust output inspected: import 11, output writer units 2, unchanged
+  CSV 30/normalization 20/P0 smoke passed. Final handoff SHA/checks/test execution
+  evidence recorded in PR #5.
+- No known functional blocker. Reports intentionally contain requested user data.
+  macOS/browser/native-WASM runtime parity NOT RUN; WASM compile is not parity proof.
 - No public combined-import/core changes, real data, broker/network feature,
   browser/WASM import, release or deployment. Stop at PR review, not P1 acceptance.
