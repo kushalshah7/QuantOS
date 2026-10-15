@@ -101,7 +101,7 @@ fn arguments(args: &[OsString]) -> Option<(PathBuf, PathBuf)> {
         return None;
     }
     let (mut csv, mut config) = (None, None);
-    for pair in args[1..].chunks_exact(2) {
+    for pair in args[1..].as_chunks::<2>().0 {
         let value = &pair[1];
         if value.is_empty() || value == "-" || value.as_encoded_bytes().starts_with(b"--") {
             return None;
