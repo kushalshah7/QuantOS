@@ -79,7 +79,12 @@
 - No known unresolved contract finding. P1 as a whole was not accepted or
   implemented by that documentation checkpoint. QOS-0003 is separately authorized.
 
-## QOS-0003 / P1 Rust normalizer — REVIEW (owner acceptance pending)
+## QOS-0003 / P1 Rust normalizer — ACCEPTED
+
+- Owner accepted head `6a7030eb0d08433b1bfddd59cb30b025d4498573` on 2026-10-15.
+  PR #3 squash-merged through protections as
+  `a38ddfbb998f855faf8a12480d60761c44d1755c`; exact head/checks/conversations/
+  gates rechecked, no bypass. Local develop fast-forwarded; no P1-wide acceptance.
 
 - Approved card created/pushed first as `1a9f724`; branch
   `feature/qos-0003-core-normalizer` starts at exact required `origin/develop`
@@ -94,12 +99,27 @@
   lockfile resolution succeeded; staged diff check exited 0; scoped sensitive-
   pattern inspection found no matching filenames.
 - Verified implementation checkpoint `ac7dcad49ca08a8f719e5511ff270d244b506f2a`;
-  [PR #3](https://github.com/kushalshah7/QuantOS/pull/3) targets develop, unmerged.
+  [PR #3](https://github.com/kushalshah7/QuantOS/pull/3) targeted develop and is merged.
   [Push CI](https://github.com/kushalshah7/QuantOS/actions/runs/38695942990) passed;
   actual Rust output shows `tests/normalization.rs`: 20 passed, 0 failed,
   0 ignored, including golden groups, focused edges and isolated TZ subprocesses.
   Final handoff SHA/checks and final-head suite output are recorded in PR #3.
 - No known unresolved implementation finding. WASM evidence is target compilation
   only; browser/native-WASM result parity and macOS NOT RUN.
-- No CSV parsing, WASM/browser normalization binding, CLI command, release or
-  deployment. Stop at one PR to develop; implementation review is not P1 acceptance.
+- That task added no CSV parsing, WASM/browser normalization binding, CLI command,
+  release or deployment. Its acceptance is limited to the approved P1 subtask.
+
+## QOS-0004 / P1 CSV parser and pipeline — IN PROGRESS
+
+- Required remote base/PR #3 merge verified as `a38ddfbb998f855faf8a12480d60761c44d1755c`.
+  Clean isolated branch `feature/qos-0004-csv-parser`; task card and locked CSV
+  contract created/pushed before implementation as `9edcdac`.
+- Original checkout not edited. QOS-0003 prompt was absent at filesystem preflight;
+  present QOS-0004 prompt was hashed read-only for preservation verification.
+- CSV-only tagged API/six codes and new independent parser/pipeline tests;
+  normalization implementation/types/codes/tests and accepted contracts intact.
+- Local tests/builds NOT RUN (LOW-RESOURCE). Existing pinned rustfmt permitted;
+  runtime CSV/pipeline and unchanged normalization/P0 evidence awaits CI.
+- No dependency/manifest/lock/toolchain/workflow change, combined public import
+  entry point, file IO, CLI/browser work, release, deployment or P1 acceptance.
+  Stop at one PR to develop, before merge or another task.

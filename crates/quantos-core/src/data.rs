@@ -1,9 +1,11 @@
 //! Schema-1 normalization of an already parsed, in-memory synthetic/private table.
 
+mod csv;
 mod numbers;
 mod time;
 mod types;
 
+pub use csv::{CsvParseCodeV1, CsvParseIssueV1, CsvParseResultV1, parse_csv_v1};
 pub use types::{
     AdjustmentStatusV1, GapAssessmentV1, IntervalV1, IssueCodeV1, IssueSeverityV1, IssueV1,
     NormalizationResultV1, NormalizationStatusV1, NormalizedCandleV1, ProvenanceV1,

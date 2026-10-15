@@ -27,12 +27,13 @@ pub fn normalize_v1(
 ) -> quantos_core::data::NormalizationResultV1;
 ```
 
-This is the sole new callable domain entry point. Its input is an in-memory JSON
+This QOS-0003 domain entry point takes an in-memory JSON
 value containing an already-parsed CSV table, explicit options and provenance.
 Its public path is `quantos_core::data::normalize_v1`.
 It reports malformed/missing/unknown properties without strict deserialization
-discarding independently detectable errors. No CSV/JSON-text parsing, file IO,
-network access, host-timezone lookup, worker protocol or cancellation API is added.
+discarding independently detectable errors. This normalization entry point does
+not parse CSV/JSON text or add file IO, network access, host-timezone lookup,
+worker protocol or cancellation behavior.
 
 The accepted [schema-1 contract](data-contract.md) defines the exact fields,
 lexical formats, issue codes and ordering. Supporting public result types live
@@ -60,3 +61,32 @@ LOW-RESOURCE mode. Existing pinned rustfmt and Cargo lockfile resolution are the
 only local tool exceptions. Acceptance requires final-head CI output proving the
 new suite actually ran. The unchanged WASM target check proves compilation only,
 not browser execution or native/WASM normalization-result parity. macOS NOT RUN.
+
+## QOS-0004 Rust-only CSV byte API
+
+Public path: `quantos_core::data::parse_csv_v1`.
+
+```rust
+pub fn parse_csv_v1(input: &[u8]) -> quantos_core::data::CsvParseResultV1;
+```
+
+Re-exported types are `CsvParseResultV1` (tagged success/failure enum),
+`CsvParseIssueV1` and closed `CsvParseCodeV1`. They implement Serialize only using
+existing dependencies. Exact fields, offsets, UTF-8/BOM/quote/separator rules and
+six parser-only codes are fixed in [csv-contract.md](csv-contract.md). Parser
+failure never exposes a partial table, and messages do not echo raw CSV contents.
+
+Success preserves exact decoded strings; it does not validate header names,
+widths, identity, numeric/time semantics or valid market data. Callers must
+explicitly construct the existing normalize_v1 request with metadata/options;
+the composition in `tests/csv.rs` is test-only. No public combined-import,
+JSON-request text parser, file IO, CLI command, WASM export or browser interface
+is introduced. Existing normalization behavior and all 25 domain codes are intact.
+
+New CSV/pipeline integration tests use independent parser expectations and
+read-only synthetic fixtures via include_bytes!, including preserved multiline
+source and atomic parse/domain failures. Final-head CI must prove this suite and
+the unchanged normalization/P0 suites ran. QOS-0004 local tests/builds NOT RUN;
+existing pinned rustfmt and lightweight text/Git checks only. No dependencies,
+lockfile, toolchain or workflow changed. WASM remains compilation-only evidence;
+macOS and browser/native-WASM runtime parity NOT RUN. This is not P1 acceptance.
