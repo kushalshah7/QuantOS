@@ -2,9 +2,11 @@
 
 All values below are invented. `SYNTH`/`TEST` are fictional and all examples,
 including deliberately false provenance declarations, are synthetic test designs.
-They contain no market observations. These are hand-written expected results for
-[the data contract](../../docs/data-contract.md), not executed tests or a working
-CSV importer. No runtime normalization API is present.
+They contain no market observations. These QOS-0002 hand-written expected results
+specify [the data contract](../../docs/data-contract.md); the Markdown is not an
+executable test. QOS-0003 implemented normalization, QOS-0004 added CSV parsing,
+and QOS-0005 exposes the native CLI. Rust tests transcribe these expectations;
+see the [P1 acceptance packet](../../docs/p1-acceptance.md) for executed CI evidence.
 
 ## Exact base input and notation
 
@@ -192,10 +194,12 @@ For every case, rerunning the same typed input/options must preserve status,
 metadata, candle values/order, gap status/missing list and ordered issue keys.
 Changing the process timezone between UTC and Asia/Kolkata must not change them.
 Cases N01 and T01–T04 specifically expose unit/offset mistakes; A01–A03 expose
-fail-fast or partial-acceptance mistakes. These are future acceptance requirements,
-not a claim that such runs were performed.
+fail-fast or partial-acceptance mistakes. Executable Rust assertions now cover
+these expectations; their observed CI results are linked in the acceptance packet.
 
-QOS-0002 uses manual document/arithmetic review and lightweight Git diff checks.
-Local test/build checks: **NOT RUN** (LOW-RESOURCE). Existing GitHub Actions only
-regression-tests the P0 skeleton. It does not read/assert these cases, validate
-their arithmetic or prove a normalizer exists. Runtime tests need a new task.
+QOS-0002 used manual document/arithmetic review and lightweight Git diff checks.
+Current Ubuntu CI executes the Rust normalization, CSV/pipeline and CLI tests,
+not this Markdown, and does not independently validate its arithmetic. Office-
+laptop runtime checks and personal-machine hands-on validation are **NOT RUN**;
+macOS and browser/native-WASM runtime parity are **NOT RUN**. WASM compilation
+alone is not runtime parity evidence. Aggregate P1 acceptance remains pending.

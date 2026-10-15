@@ -14,10 +14,16 @@ These files contain no observations from a market, broker, or proprietary feed.
   expected-output cases for the owner-approved normalization contract, including
   exact paise/UTC arithmetic, validation, provenance and atomic failure.
 
-Phase 0 tests verify that the CSV examples have the advertised properties. They
-do not implement or certify an importer or execute the normalization cases.
-QOS-0002 specifies the contract only; a later approved core task must implement
-and test it. Input CSV prices are rupees; documented normalized prices are paise.
+Phase 0 fixture tests verify the examples' advertised properties. QOS-0002
+specified normalization; QOS-0003 implemented it, QOS-0004 added CSV parsing and
+QOS-0005 exposes native CLI import. The Rust normalization/CSV suites and actual
+CLI subprocess tests now check these synthetic expectations; see the
+[P1 acceptance packet](../../docs/p1-acceptance.md) for immutable test links and
+implementation-base CI output. Input CSV prices are rupees; normalized prices
+are integer paise. Markdown goldens remain hand-written specifications.
 Every golden case is invented, even when testing a deliberately supplied
-`synthetic: false` provenance declaration. CI does not validate the golden
-arithmetic or prove that a normalizer exists.
+`synthetic: false` provenance declaration. CI executes Rust assertions, not the
+Markdown, and does not independently validate document arithmetic or provenance
+accuracy/rights. Office-laptop runtime and personal-machine hands-on checks,
+macOS and browser/native-WASM runtime parity are NOT RUN. WASM evidence is
+compilation only; P1-wide acceptance remains pending.

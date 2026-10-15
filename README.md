@@ -3,9 +3,12 @@
 An open-source, local-first quantitative finance terminal built around a shared
 Rust core, a separate WebAssembly adapter, and a React/TypeScript frontend.
 
-This repository starts at Phase 0: architecture and a tested foundation only.
-Data import, backtesting, charts, broker integrations, and deployment require
-separate approved tasks. No market datasets or broker credentials belong here.
+P1's native data path is implemented: CSV parsing, explicit candle normalization
+and JSON data-quality reports. The [P1 acceptance packet](docs/p1-acceptance.md)
+is ready for owner review; hands-on validation and aggregate P1 acceptance remain
+pending. The browser UI/WASM adapter still expose P0 surfaces. No financial
+engine, backtesting, charts, broker integration or deployment is implemented.
+No market datasets or broker credentials belong here.
 
 Native CSV import is now available through `quantos-cli import`; see the
 [CLI interface and synthetic personal-machine example](docs/cli-import.md).
