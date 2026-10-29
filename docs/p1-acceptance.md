@@ -1,16 +1,22 @@
 # P1 data acceptance packet
 
-**Decision: READY FOR OWNER REVIEW. P1 acceptance is pending.**
+**Decision: P1 ACCEPTED by the owner on 2026-10-29.**
+The owner explicitly accepted P1 and authorized PR #7's squash merge after the
+reviewed head `da33ea0e199afe4d732afe6f45dc874a2dc8981e` passed its checks.
+PR #7 merged into protected develop as `21ac34874550e89873f677cb395140e0ebbd957f`.
+The written chat decision is owner signoff, not a formal GitHub review approval.
 Evidence rechecked 2026-10-15 at implementation SHA
 `0568b5ec5b77e23e484baee012156557a81d8236` (accepted PR #5 squash merge).
-This documentation task grants no hands-on waiver, phase acceptance or P2 authority.
+The original QOS-0006 documentation task granted no waiver or phase acceptance;
+the later explicit owner decision above closes that gate. Only preparation of
+QOS-0008's draft contract is now authorized, not a P2 engine or contract approval.
 
 **2026-10-29 verification update:** [Personal-Mac validation](p1-macos-validation.md)
 executed the synthetic checklist at that exact implementation SHA. All four import
 cases and web checks passed. The initial Mac run exposed a raw-byte filename
 fixture failure. The owner approved a test-only portability fix; the amended
 full macOS Rust run passed all 68 tests with no failures, ignored or filtered
-tests. Production code and contracts are unchanged; owner acceptance is pending.
+tests. Production code and contracts are unchanged; the owner accepted this evidence.
 
 ## Scope and automated evidence
 
@@ -62,22 +68,23 @@ accepted each listed head in instructions; this does not claim formal GitHub app
 | --- | --- |
 | Ubuntu implementation CI | PASSED at the implementation SHA; [Rust][R] and [web][W] jobs. |
 | Office-laptop runtime compilation/tests/builds/CLI | NOT RUN (LOW-RESOURCE); documentation task uses text/Git only. |
-| Manual personal-machine validation | Executed by Codex on the owner's Mac on 2026-10-29; all four synthetic imports matched expected values/exits/provenance. See the [dated receipt](p1-macos-validation.md); owner review remains pending. |
+| Manual personal-machine validation | Executed by Codex on the owner's Mac on 2026-10-29; all four synthetic imports matched expected values/exits/provenance. See the [dated receipt](p1-macos-validation.md); owner accepted the recorded evidence. |
 | macOS | PASSED: 68 Rust tests after the owner-approved native-path test fix; formatting, Clippy, WASM target, native smoke and web checks passed. The initial failure and resolution are preserved in the [dated receipt](p1-macos-validation.md). |
 | WASM target | Compilation PASSED via `cargo check -p quantos-wasm --target wasm32-unknown-unknown --locked` in [R]. |
 | Browser/native-WASM runtime parity | NOT RUN; browser import bindings/worker integration are unimplemented. |
-| Written owner reviewer acceptance | PENDING; supplying this checklist is not reviewer signoff. |
+| Written owner reviewer acceptance | ACCEPTED on 2026-10-29, explicitly for P1 and PR #7 head da33ea0e199afe4d732afe6f45dc874a2dc8981e; squash merge recorded above. |
 
 MASTER_PLAN [section 1 item 9 and section 6](../MASTER_PLAN.md#6-milestones-and-approval-gates)
 require automated tests, hands-on validation and written reviewer acceptance.
-Accepted subtasks, Ubuntu CI and recorded Mac checks leave the written owner
-reviewer gate pending. A separate
-explicit owner decision is required; aggregate P1 is not ACCEPTED/COMPLETE.
+Accepted subtasks, Ubuntu CI, recorded Mac checks and the owner's written decision
+now satisfy that P1 gate. This does not approve any proposed P2 financial choices
+or authorize engine implementation; QOS-0008 is separately limited to drafting.
 Charts, browser bindings, backtesting, financial metrics and deployment remain
 unimplemented later-phase work; UI/WASM still expose P0 surfaces. Real historical
 data is unnecessary for these synthetic P1 checks and has not been validated.
 
-Owner reviewer checklist (all items pending; review/signoff NOT RUN):
+Original owner-review prompts are retained below as historical checklist text,
+not a per-item audit log. The explicit acceptance decision is recorded above.
 
 - [ ] Match the accepted heads, implementation SHA and actual CI output above.
 - [ ] Review criterion-to-test coverage and distinguish sampled assertions from untested claims.

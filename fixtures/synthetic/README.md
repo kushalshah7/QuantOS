@@ -24,6 +24,11 @@ are integer paise. Markdown goldens remain hand-written specifications.
 Every golden case is invented, even when testing a deliberately supplied
 `synthetic: false` provenance declaration. CI executes Rust assertions, not the
 Markdown, and does not independently validate document arithmetic or provenance
-accuracy/rights. Office-laptop runtime and personal-machine hands-on checks,
-macOS and browser/native-WASM runtime parity are NOT RUN. WASM evidence is
-compilation only; P1-wide acceptance remains pending.
+accuracy/rights. Office-laptop runtime checks were NOT RUN. The later personal-Mac
+checklist and Rust suite passed; the owner accepted P1 on 2026-10-29 as recorded
+in the packet. Browser/native-WASM runtime parity remains NOT RUN; WASM evidence
+is compilation only.
+
+[Proposed backtest cases](backtest-execution-cases.md) are a separate QOS-0008
+draft for owner review. They contain hand-written expectations and independently
+checked arithmetic, not engine output or approved financial rules.

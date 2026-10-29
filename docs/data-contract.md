@@ -5,7 +5,8 @@ QOS-0004 added CSV parsing, and QOS-0005 exposes the native CLI. See
 [current interfaces](api-contracts.md) and the [P1 acceptance packet](p1-acceptance.md).
 [Golden cases](../fixtures/synthetic/normalization-cases.md) remain hand-written
 specifications; executable Rust tests transcribe their expectations. Browser/WASM
-import bindings are unimplemented, and aggregate P1 acceptance remains pending.
+import bindings are unimplemented. The owner accepted aggregate P1 on 2026-10-29
+after the recorded Mac validation; see the acceptance packet for the exact head/merge.
 
 ## Scope and units
 
@@ -285,6 +286,8 @@ P0 fixture tests check example properties; the normalization/CSV suites and actu
 CLI subprocess tests now exercise the implemented data path. The acceptance packet
 links immutable tests and implementation-base Ubuntu CI output. CI runs Rust
 assertions, not this Markdown, and does not independently validate its arithmetic.
-Office-laptop runtime checks, personal-machine hands-on validation, macOS and
-browser/native-WASM runtime parity are NOT RUN; WASM evidence is compilation only.
+Office-laptop runtime checks were NOT RUN. The later personal-Mac checklist and
+full Mac Rust suite passed; the [dated receipt](p1-macos-validation.md) records
+those observations. Browser/native-WASM runtime parity remains NOT RUN; WASM
+evidence is compilation only. P1 owner acceptance does not waive that future boundary.
 Provenance preserves declarations without verifying rights or adjustment accuracy.

@@ -200,6 +200,7 @@ these expectations; their observed CI results are linked in the acceptance packe
 QOS-0002 used manual document/arithmetic review and lightweight Git diff checks.
 Current Ubuntu CI executes the Rust normalization, CSV/pipeline and CLI tests,
 not this Markdown, and does not independently validate its arithmetic. Office-
-laptop runtime checks and personal-machine hands-on validation are **NOT RUN**;
-macOS and browser/native-WASM runtime parity are **NOT RUN**. WASM compilation
-alone is not runtime parity evidence. Aggregate P1 acceptance remains pending.
+laptop runtime checks were **NOT RUN**. The later personal-Mac checklist and full
+Rust suite passed, and the owner accepted aggregate P1 on 2026-10-29; see the packet
+and its dated receipt. Browser/native-WASM runtime parity remains **NOT RUN**;
+WASM compilation alone is not runtime parity evidence.
