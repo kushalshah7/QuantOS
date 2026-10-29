@@ -1,9 +1,10 @@
 # P1 personal-Mac validation — 2026-10-29
 
-**Result: verification executed; one macOS test portability blocker remains.**
-All four synthetic acceptance imports and the web quality suite passed. The full
-Rust suite failed in a fixture-creation step, before calling the CLI. P1 owner
-acceptance remains PENDING; no phase advancement, merge or deployment occurred.
+**Result: Mac validation and Ubuntu CI PASSED; READY FOR OWNER REVIEW.**
+All four synthetic acceptance imports, all 68 Rust workspace tests and the web
+quality suite passed. An initial fixture-creation failure was resolved through
+the owner's approved test-only amendment. P1 owner acceptance remains PENDING;
+no phase advancement, merge or deployment occurred.
 
 ## Checkout and environment
 
@@ -12,8 +13,10 @@ acceptance remains PENDING; no phase advancement, merge or deployment occurred.
 - Validation branch: `feature/qos-0007-macos-validation`; [PR #7](https://github.com/kushalshah7/QuantOS/pull/7).
 - Exact acceptance-import checkout: detached implementation commit
   `0568b5ec5b77e23e484baee012156557a81d8236`; returned to the validation branch.
-- Executable sources, tests, CSV/JSON fixtures, manifests, lockfiles, toolchain
-  and workflow compare unchanged between that implementation SHA and the branch.
+- Before the approved amendment, executable sources/tests and all build inputs
+  compared unchanged with that implementation SHA. The only subsequent executable
+  edit is the approved native-path test file; production sources, CSV/JSON
+  fixtures, manifests, lockfiles, toolchain and workflow remain unchanged.
 - macOS 27.0, build 26A428; Apple Silicon, `aarch64-apple-darwin`.
 - Rust `1.99.0 (b940084d7 2026-09-28)`, Cargo `1.99.0 (5f94df478 2026-08-27)`;
   rustfmt, Clippy and `wasm32-unknown-unknown` installed through rustup.
@@ -64,14 +67,17 @@ no real market dataset, credential or user backtest result was processed.
 
 All commands used the pinned tools. The deterministic dependency install ran at
 the implementation checkout; remaining quality checks ran after returning to the
-task branch. The manifests, lockfiles and all executable inputs were identical.
+task branch. Production/build inputs remain identical; only the approved native-
+path tests changed. After that change, focused import tests and the full Rust
+fmt/Clippy/test/WASM checks were rerun. Prior web checks retain unchanged inputs.
 
 | Command | Actual result |
 | --- | --- |
 | `cargo fmt --all -- --check` | PASS |
 | `cargo clippy --workspace --all-targets --locked -- -D warnings` | PASS |
-| `cargo test --workspace --locked` | FAIL: import suite 10 passed / 1 failed; Cargo stopped before later suites. |
-| `cargo test --workspace --locked --no-fail-fast` | FAIL: 66 passed / 1 failed overall; no ignored/filtered tests. Only the same filename fixture failed. |
+| `cargo test -p quantos-cli --test import --locked` | PASS after amendment: 12 passed / 0 failed / 0 ignored / 0 filtered. |
+| `cargo test --workspace --locked` | PASS after amendment: 68 passed / 0 failed / 0 ignored / 0 filtered. Initial pre-amendment run failed during filename fixture creation. |
+| `cargo test --workspace --locked --no-fail-fast` | Historical pre-amendment diagnostic: 66 passed / 1 failed; no ignored/filtered tests. Only the filename fixture failed; this is superseded by the full passing run above. |
 | `cargo check -p quantos-wasm --target wasm32-unknown-unknown --locked` | PASS; target compilation only. |
 | `cargo run -p quantos-cli --locked` | PASS; preserved P0 foundation status, exit 0. |
 | `npm ci --ignore-scripts` | PASS; 178 packages added, 180 audited; zero vulnerabilities reported at execution time. |
@@ -80,37 +86,43 @@ task branch. The manifests, lockfiles and all executable inputs were identical.
 | `npm test` | PASS; one test in one test file with pinned Node. |
 | `npm run build` | PASS; production assets built locally, no hosting/deployment. |
 
-Actual Rust groups in the complete diagnostic run: CLI output units 2 passed;
-CLI import 10 passed/1 failed; CLI smoke 1 passed; CSV/pipeline 30 passed;
+Actual Rust groups in the amended full run: CLI output units 2 passed;
+CLI import 12 passed; CLI smoke 1 passed; CSV/pipeline 30 passed;
 fixtures 2 passed; normalization 20 passed; native adapter 1 passed.
 
-## Reproduced blocker and proposed scope amendment
+## Reproduced portability failure and approved fix
 
-`crates/quantos-cli/tests/import_cases/cases.rs:400` marks the raw-byte filename
-fixture `#[cfg(unix)]`, which includes macOS. At line 408, creating
-`prices\xff.csv` fails with OS error 92, `Illegal byte sequence`; the CLI has not
-yet started. Independent file-creation probes reproduced this on both the system
+The [pre-amendment test](https://github.com/kushalshah7/QuantOS/blob/d739287e1a3f4cfeaf0a39e762e5a56c481a10b1/crates/quantos-cli/tests/import_cases/cases.rs#L400)
+marked the raw-byte filename fixture `#[cfg(unix)]`, which includes macOS.
+Creating `prices\xff.csv` failed at old line 408 with OS error 92, `Illegal byte
+sequence`; the CLI had not yet started. Independent file-creation probes
+reproduced this on both the system
 temporary directory and the project filesystem. This is an invalid assumption
 about supported test-fixture filenames; the observed imports do not show a
-normalizer/CLI calculation defect. The full macOS Rust suite remains FAILED.
+normalizer/CLI calculation defect. The initial full macOS Rust suite FAILED.
 
-Proposed bounded amendment for owner approval: allow edits to this one test file;
-keep the successful raw-byte filename case on other Unix targets, add a portable
-Unicode CSV/config filename success case, and assert sanitized read failures for
-macOS-rejected raw-byte paths. Keep production code, contracts, dependencies and
-Linux raw-byte success assertions unchanged. Run focused import tests, then the
-full Rust acceptance checks and existing Ubuntu CI. No test waiver is inferred.
+The owner selected "Fix the test and finish validation" on 2026-10-29. Amendment
+`d8d926d0f6c70dc6cae3528713363abed42324be` was pushed before editing the approved
+test file. Fix checkpoint `f325279a4485db7fdc4c098f642e8904e869a4a3`:
+
+- Retains unchanged raw-byte filename success assertions on non-macOS Unix.
+- Adds successful Unicode CSV/config filenames on all platforms.
+- On macOS, passes raw-byte native paths directly to the CLI and asserts exact
+  sanitized CSV_READ / CONFIG_READ reports, exit 3 and empty stderr, without
+  attempting to create filenames the filesystem rejects.
+- Changes no production code, dependency, contract or other test file. Focused
+  and full local Rust checks pass; no ignored tests, runtime skips or waiver.
 
 ## Review gate
 
-Current personal-Mac observations are recorded; the test portability fix needs a
-scope amendment under `AGENTS.md`. Evidence checkpoint
-`c66474b576c80e90d2a1576fa2af4b935fc672c3` passed both `rust-quality` and
-`web-quality` in [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/40815336519)
-and [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/40815330296).
-Actual PR Rust output confirms 11 CLI import tests passed on Ubuntu, including
-the raw-byte filename case. These results do not override the local macOS failure.
-The subsequent documentation-handoff head and checks are recorded in PR #7.
-Owner written P1
-acceptance remains pending. Browser/native-WASM runtime parity is NOT RUN because
+Local validation is complete under the owner's amendment. Fix checkpoint
+`f325279a4485db7fdc4c098f642e8904e869a4a3` passed both required quality jobs in
+[PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/40845132505) and
+[push CI](https://github.com/kushalshah7/QuantOS/actions/runs/40845123060).
+Actual Ubuntu Rust output confirms 12 import tests passed, including both the
+retained raw-byte success case and the new Unicode success case. The full Mac
+run instead executes the macOS read-error case plus Unicode success, both PASS.
+The final documentation-handoff head/checks are recorded in PR #7.
+Owner written P1 acceptance remains
+pending. Browser/native-WASM runtime parity is NOT RUN because
 browser import bindings remain unimplemented. No P2 work is authorized.

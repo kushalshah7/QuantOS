@@ -55,16 +55,16 @@ contract, governance or historical task-card changes. No real data or credential
 5. Review the written P1 criteria against observed results. Update only allowed
    current-status prose; retain owner acceptance PENDING and browser/WASM parity
    NOT RUN. No browser import binding exists to test parity.
-6. Review exact changed paths/diff and sensitive patterns, commit/push verified
-   checkpoints, open one PR to `develop`, inspect required CI at its final head,
-   verify remote SHA and clean working tree, then stop for owner review.
-7. Under the approved amendment, restrict the existing raw-byte success fixture
+6. Under the approved amendment, restrict the existing raw-byte success fixture
    to non-macOS Unix targets, add portable Unicode CSV/config path success and
    macOS raw-byte path read-error assertions. Run the focused CLI import suite,
    then full Rust fmt/Clippy/workspace tests/WASM checks. Existing successful web
    checks remain valid while their inputs are unchanged. Inspect Ubuntu CI to
    verify that raw-byte success coverage still executes there. No silent skips,
    relaxed expectations, production-code changes or test waivers.
+7. Review exact changed paths/diff and sensitive patterns, commit/push verified
+   checkpoints, open one PR to `develop`, inspect required CI at its final head,
+   verify remote SHA and clean working tree, then stop for owner review.
 
 ## Stop conditions
 
@@ -76,13 +76,16 @@ P2, release, deployment, broker operation or real-data processing is authorized.
 
 ## Handoff
 
-- Status: IN PROGRESS under the owner's approved test-only scope amendment.
+- Status: REVIEW; local Mac validation and fix-checkpoint Ubuntu CI PASS under
+  the owner's approved test-only amendment; no known functional blocker.
 - Evidence: `docs/p1-macos-validation.md`; all four synthetic imports PASS;
-  fmt/Clippy/WASM/native status and all web checks PASS; pre-amendment full Rust
-  suite FAILED (66 passed / one fixture-creation failure). Amended tests pending.
-- PR: https://github.com/kushalshah7/QuantOS/pull/7 to develop, kept draft for the
-  unresolved local failure. Evidence checkpoint
-  `c66474b576c80e90d2a1576fa2af4b935fc672c3` passed both required Ubuntu jobs in
-  PR run `40815336519` / push run `40815330296`; final documentation-handoff
-  head/checks are recorded in the PR. Ubuntu green does not waive macOS failure.
+  fmt/Clippy/WASM/native status and all web checks PASS. Pre-amendment full Rust
+  suite FAILED (66 passed / one fixture-creation failure); focused amended import
+  tests 12/12 and full amended Rust suite 68/68 PASS, zero ignored/filtered.
+- Approval checkpoint: `d8d926d0f6c70dc6cae3528713363abed42324be`;
+  verified pushed test-fix checkpoint: `f325279a4485db7fdc4c098f642e8904e869a4a3`.
+- PR: https://github.com/kushalshah7/QuantOS/pull/7 to develop. Fix-checkpoint PR CI
+  `40845132505` / push CI `40845123060` passed both quality jobs; actual Ubuntu
+  logs confirm 12 import tests including retained raw-byte success and new Unicode
+  success. Final documentation-handoff head/checks are recorded in PR #7.
 - Owner reviewer acceptance: PENDING.

@@ -7,9 +7,10 @@ This documentation task grants no hands-on waiver, phase acceptance or P2 author
 
 **2026-10-29 verification update:** [Personal-Mac validation](p1-macos-validation.md)
 executed the synthetic checklist at that exact implementation SHA. All four import
-cases and web checks passed. A raw-byte filename fixture fails during file
-creation on macOS; the complete Rust run has 66 passes and one failure. Owner
-acceptance remains pending; green Ubuntu CI does not waive this local blocker.
+cases and web checks passed. The initial Mac run exposed a raw-byte filename
+fixture failure. The owner approved a test-only portability fix; the amended
+full macOS Rust run passed all 68 tests with no failures, ignored or filtered
+tests. Production code and contracts are unchanged; owner acceptance is pending.
 
 ## Scope and automated evidence
 
@@ -62,15 +63,15 @@ accepted each listed head in instructions; this does not claim formal GitHub app
 | Ubuntu implementation CI | PASSED at the implementation SHA; [Rust][R] and [web][W] jobs. |
 | Office-laptop runtime compilation/tests/builds/CLI | NOT RUN (LOW-RESOURCE); documentation task uses text/Git only. |
 | Manual personal-machine validation | Executed by Codex on the owner's Mac on 2026-10-29; all four synthetic imports matched expected values/exits/provenance. See the [dated receipt](p1-macos-validation.md); owner review remains pending. |
-| macOS | Rust suite FAILED (66 passed / one filename-fixture setup failure); formatting, Clippy, WASM target, native smoke and web checks passed. See the [dated receipt](p1-macos-validation.md). |
+| macOS | PASSED: 68 Rust tests after the owner-approved native-path test fix; formatting, Clippy, WASM target, native smoke and web checks passed. The initial failure and resolution are preserved in the [dated receipt](p1-macos-validation.md). |
 | WASM target | Compilation PASSED via `cargo check -p quantos-wasm --target wasm32-unknown-unknown --locked` in [R]. |
 | Browser/native-WASM runtime parity | NOT RUN; browser import bindings/worker integration are unimplemented. |
 | Written owner reviewer acceptance | PENDING; supplying this checklist is not reviewer signoff. |
 
 MASTER_PLAN [section 1 item 9 and section 6](../MASTER_PLAN.md#6-milestones-and-approval-gates)
 require automated tests, hands-on validation and written reviewer acceptance.
-Accepted subtasks, Ubuntu CI and recorded Mac imports leave the macOS test blocker
-and written reviewer gate pending. A separate
+Accepted subtasks, Ubuntu CI and recorded Mac checks leave the written owner
+reviewer gate pending. A separate
 explicit owner decision is required; aggregate P1 is not ACCEPTED/COMPLETE.
 Charts, browser bindings, backtesting, financial metrics and deployment remain
 unimplemented later-phase work; UI/WASM still expose P0 surfaces. Real historical

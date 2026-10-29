@@ -214,7 +214,7 @@
   NOT RUN. No functional blocker found in this focused evidence audit. No P1-wide
   acceptance, merge, release, deployment or P2 work authorized/performed.
 
-## QOS-0007 / P1 personal-Mac validation — BLOCKED on test scope amendment
+## QOS-0007 / P1 personal-Mac validation — REVIEW
 
 - Owner requested the GitHub-to-next-task workflow on their Mac on 2026-10-29.
   Fresh clone; existing `develop` and merged PR #6 verified. Approved bounded
@@ -222,7 +222,7 @@
   `feature/qos-0007-macos-validation`; [PR #7](https://github.com/kushalshah7/QuantOS/pull/7)
   targets `develop`. Main remains the documentation seed; no P0 restart.
 - [Dated Mac receipt](docs/p1-macos-validation.md) records exact environment,
-  commands, synthetic observations, local setup issue and remaining test blocker.
+  commands, synthetic observations, local setup issue and resolved test blocker.
   Installed pinned Rust 1.99.0, WASM target, Node 24.19.0 and npm 11.17.0 locally;
   no tracked dependency/toolchain/workflow changes.
 - All four acceptance imports PASS at exact implementation SHA
@@ -233,15 +233,28 @@
   typecheck, one web test and production build PASS. Ancestor Node 21.2.0 initially
   shadowed pinned Node inside npm scripts; ignored local shim fixed resolution,
   and all web checks were rerun with pinned Node.
-- Full Rust suite FAILS: 66 passed / one failed. The `#[cfg(unix)]` non-UTF8
+- Initial full Rust suite FAILED: 66 passed / one failed. The `#[cfg(unix)]` non-UTF8
   filename fixture panics while creating a filename macOS rejects (OS error 92),
   before CLI execution. Reproduced independently on both local filesystems.
-  Proposed one-test-file amendment is in the receipt; owner response pending.
+  Owner approved the one-test-file amendment on 2026-10-29; approval recorded and
+  pushed first as `d8d926d0f6c70dc6cae3528713363abed42324be`.
+- Fix checkpoint `f325279a4485db7fdc4c098f642e8904e869a4a3` pushed: original raw-
+  byte success assertions retained for non-macOS Unix, portable Unicode success,
+  and macOS sanitized native-path read errors. Focused imports 12/12 PASS; full
+  Mac Rust suite 68/68 PASS, zero failed/ignored/filtered. Fmt, Clippy and WASM
+  target checks rerun and PASS. Production sources, contracts and build inputs
+  remain unchanged; previous local web checks remain applicable.
 - Evidence checkpoint `c66474b576c80e90d2a1576fa2af4b935fc672c3` remotely verified;
   both quality jobs passed in [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/40815336519)
   and [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/40815330296).
   Actual Ubuntu output includes all 11 import tests passing, including the
-  raw-byte filename case; it does not waive the macOS failure. Final documentation
-  handoff head/checks are recorded in the draft PR. Working tree clean at checkpoint.
-- No production/test source edits, real data, P1 owner acceptance, P2, merge,
+  raw-byte filename case. That historical Ubuntu result did not waive the initial
+  Mac failure; the approved fix and passing Mac run above resolve it. Current
+  fix-checkpoint [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/40845132505)
+  and [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/40845123060)
+  both passed Rust/web quality jobs at `f325279a4485db7fdc4c098f642e8904e869a4a3`.
+  Actual Ubuntu Rust output inspected: 12 import tests passed, including retained
+  raw-byte filename success and new Unicode success. Final documentation handoff
+  head/checks are recorded in PR #7; no functional blocker remains in this scope.
+- No production source/other test edits, real data, P1 owner acceptance, P2, merge,
   release or deployment. Browser/native-WASM runtime parity NOT RUN.
