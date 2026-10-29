@@ -9,7 +9,7 @@ and JSON data-quality reports. The owner accepted P1 on 2026-10-29; the
 [Personal-Mac validation](docs/p1-macos-validation.md)
 ran on 2026-10-29: synthetic imports, all 68 Rust tests and web checks passed
 after an owner-approved test portability fix. A [P2 execution-contract proposal](docs/backtest-execution-v1-draft.md)
-is being prepared for review; its financial choices are not approved. The browser UI/WASM adapter still expose P0
+is ready for owner review; its financial choices are not approved. The browser UI/WASM adapter still expose P0
 surfaces. No financial engine, backtesting, charts, broker integration or
 deployment is implemented.
 No market datasets or broker credentials belong here.

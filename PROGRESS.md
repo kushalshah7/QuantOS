@@ -279,7 +279,7 @@
 - No production source/other test edits, real data, P1 owner acceptance, P2, merge,
   release or deployment. Browser/native-WASM runtime parity NOT RUN.
 
-## QOS-0008 / P2 execution-contract proposal — IN PROGRESS
+## QOS-0008 / P2 execution-contract proposal — REVIEW
 
 - Documentation-only drafting explicitly authorized; scope card pushed first as
   `dd75e6cbeb71044a769653b62add8d809cb1dd10` on
@@ -290,7 +290,15 @@
 - Independent Python integer/Fraction assertions passed all numerical example
   expectations. They did not run an engine, simulate fill timing, validate error
   atomicity or prove strategy behavior. Local runtime suites NOT RERUN.
-- Current P1 status prose updated; financial contract/golden bodies and all
-  executable/build/data inputs stay unchanged. PR/final-head CI pending.
+- Current P1 status prose updated; existing financial contract/golden bodies and
+  all executable/build/data inputs stay unchanged. Exact 13-path Markdown-only
+  allowlist, immutable bodies/code/tables, local links, whitespace and added-text
+  sensitive-pattern inspections passed.
+- Verified pushed proposal checkpoint `17a402724555ad4bba38c89e63d973bcd2128f2f`;
+  [PR #8](https://github.com/kushalshah7/QuantOS/pull/8) targets develop. Both
+  required jobs passed in [proposal PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/40865611951)
+  and [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/40865579325).
+  CI is unchanged-code regression evidence, not validation of the proposed model
+  or Markdown arithmetic. Final documentation-handoff SHA/checks are in PR #8.
 - No engine/API implementation, indicator rules, broker calls, real data,
   contract approval, P2 acceptance, release or deployment. Next step: owner review.

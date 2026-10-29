@@ -90,8 +90,17 @@ contract/golden-body changes. Local arithmetic scratch work stays outside Git.
 
 ## Handoff
 
-- Status: IN PROGRESS; contract proposal and arithmetic checks pending.
+- Status: REVIEW; explicit DRAFT/NON-EXECUTABLE proposal ready for owner review.
 - P1: owner accepted reviewed head above; PR #7 merged as exact branch base.
-- Local runtime checks: NOT RERUN for this documentation-only task.
-- CI / PR / final SHA: pending execution.
+- Local checks: Python integer/Fraction assertions passed numerical expectations
+  for E01–E13 (not engine behavior). Exact allowlist/immutable-body/code/table,
+  link, sensitive-pattern and whitespace checks PASS. Runtime suites NOT RERUN
+  for prose-only work; all executable inputs compare unchanged with the base.
+- Proposal checkpoint: `17a402724555ad4bba38c89e63d973bcd2128f2f`, pushed/verified.
+  Required Rust/web jobs passed in PR CI `40865611951` and push CI `40865579325`;
+  unchanged-code regression evidence only. Base post-merge CI `40864207895` passed
+  at `21ac34874550e89873f677cb395140e0ebbd957f`.
+- PR: https://github.com/kushalshah7/QuantOS/pull/8 to develop; final documentation-
+  handoff SHA/checks recorded in its description. Existing backtest invariants,
+  P1 financial/schema/API/golden bodies and CSV/JSON fixtures preserved.
 - Next decision: owner review of the explicit P2 proposal; no engine authorization.
