@@ -104,7 +104,13 @@ full Rust acceptance checks and existing Ubuntu CI. No test waiver is inferred.
 ## Review gate
 
 Current personal-Mac observations are recorded; the test portability fix needs a
-scope amendment under `AGENTS.md`. Required CI will be recorded at the final PR
-head. Green Ubuntu CI cannot override the local macOS failure. Owner written P1
+scope amendment under `AGENTS.md`. Evidence checkpoint
+`c66474b576c80e90d2a1576fa2af4b935fc672c3` passed both `rust-quality` and
+`web-quality` in [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/40815336519)
+and [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/40815330296).
+Actual PR Rust output confirms 11 CLI import tests passed on Ubuntu, including
+the raw-byte filename case. These results do not override the local macOS failure.
+The subsequent documentation-handoff head and checks are recorded in PR #7.
+Owner written P1
 acceptance remains pending. Browser/native-WASM runtime parity is NOT RUN because
 browser import bindings remain unimplemented. No P2 work is authorized.

@@ -67,5 +67,9 @@ P2, release, deployment, broker operation or real-data processing is authorized.
 - Evidence: `docs/p1-macos-validation.md`; all four synthetic imports PASS;
   fmt/Clippy/WASM/native status and all web checks PASS; full Rust suite FAILS
   (66 passed / one fixture-creation failure). No production code defect observed.
-- PR: https://github.com/kushalshah7/QuantOS/pull/7 to develop; final-head CI pending.
+- PR: https://github.com/kushalshah7/QuantOS/pull/7 to develop, kept draft for the
+  unresolved local failure. Evidence checkpoint
+  `c66474b576c80e90d2a1576fa2af4b935fc672c3` passed both required Ubuntu jobs in
+  PR run `40815336519` / push run `40815330296`; final documentation-handoff
+  head/checks are recorded in the PR. Ubuntu green does not waive macOS failure.
 - Owner reviewer acceptance: PENDING.

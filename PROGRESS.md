@@ -237,5 +237,11 @@
   filename fixture panics while creating a filename macOS rejects (OS error 92),
   before CLI execution. Reproduced independently on both local filesystems.
   Proposed one-test-file amendment is in the receipt; owner response pending.
+- Evidence checkpoint `c66474b576c80e90d2a1576fa2af4b935fc672c3` remotely verified;
+  both quality jobs passed in [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/40815336519)
+  and [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/40815330296).
+  Actual Ubuntu output includes all 11 import tests passing, including the
+  raw-byte filename case; it does not waive the macOS failure. Final documentation
+  handoff head/checks are recorded in the draft PR. Working tree clean at checkpoint.
 - No production/test source edits, real data, P1 owner acceptance, P2, merge,
   release or deployment. Browser/native-WASM runtime parity NOT RUN.
