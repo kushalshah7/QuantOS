@@ -32,10 +32,11 @@ Typed enums/required Rust fields prevent unknown variants/omitted fields at this
 entry. A future JSON/browser decoder must lock its own rejection contract; this
 API does not claim to parse malformed JSON or unknown property types.
 
-Validation is deterministic first-error, not P1's aggregated JSON validation:
-version; config fields in declaration order; metadata.source; nonempty candles
+Input schema_version must be exactly "1". Validation is deterministic first-error,
+not P1's aggregated JSON validation: version; config fields in declaration order; metadata.source; nonempty candles
 and safe length; decisions count; then candles in input order, fields symbol,
-exchange, source, timestamp, OHLC fields/range/consistency, volume. Identity/source
+exchange, source, timestamp, numeric/range checks for open/high/low/close in that
+order, OHLC consistency, then volume. Identity/source
 strings use P1's exact ASCII-whitespace-only empty check and preserve bytes.
 Metadata enum/boolean values are type-enforced. Timestamp range is P1's range;
 adjacent OPENs differ exactly 300000 ms. No input mutation or inferred values.
