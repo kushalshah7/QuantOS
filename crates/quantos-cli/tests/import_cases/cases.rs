@@ -398,7 +398,19 @@ fn repeated_calls_and_success_failure_leave_inputs_unchanged() {
     assert_eq!(fs::read(&cfg).unwrap(), b"{SECRET");
     assert_eq!(fs::read(&csv).unwrap(), BAD_OHLC);
 }
-#[cfg(unix)]
+#[test]
+fn native_unicode_input_paths_are_supported() {
+    let d = Sandbox::new();
+    let csv = d.write("prices-é-株.csv", VALID);
+    let cfg = d.write("config-é-株.json", CONFIG);
+    check(
+        "native Unicode paths",
+        d.import(&csv, &cfg),
+        0,
+        normalized(candles(), vec![], true),
+    );
+}
+#[cfg(all(unix, not(target_os = "macos")))]
 #[test]
 fn native_non_utf8_input_paths_are_supported() {
     use std::os::unix::ffi::OsStringExt;
@@ -412,5 +424,28 @@ fn native_non_utf8_input_paths_are_supported() {
         d.import(&csv, &cfg),
         0,
         normalized(candles(), vec![], true),
+    );
+}
+#[cfg(target_os = "macos")]
+#[test]
+fn native_non_utf8_unreadable_paths_are_sanitized() {
+    use std::os::unix::ffi::OsStringExt;
+    let d = Sandbox::new();
+    // Pass raw-byte native paths without trying to create filenames macOS rejects.
+    let csv = d.path.join(OsString::from_vec(b"prices\xff.csv".to_vec()));
+    let cfg = d.write("import config.json", CONFIG);
+    check(
+        "unreadable native CSV path",
+        d.import(&csv, &cfg),
+        3,
+        cli("CSV_READ", "csv"),
+    );
+    let csv = d.write("prices.csv", VALID);
+    let cfg = d.path.join(OsString::from_vec(b"config\xfe.json".to_vec()));
+    check(
+        "unreadable native config path",
+        d.import(&csv, &cfg),
+        3,
+        cli("CONFIG_READ", "config"),
     );
 }
