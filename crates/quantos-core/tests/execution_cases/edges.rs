@@ -500,6 +500,25 @@ fn rejected_protection_can_retry_only_on_a_later_bar() {
 }
 
 #[test]
+fn entry_bar_stop_uses_worse_open_when_buy_slippage_puts_stop_above_open() {
+    let mut i = input(&[10000, 10000], &[ENTER, HOLD]);
+    i.config.market_slippage_bps = 1000;
+    i.config.stop_loss_bps = Some(200);
+    let r = report(&i);
+    assert_eq!(r.fills.len(), 2);
+    assert_eq!(r.fills[0].fill_price_paise, 11000);
+    // Entry-relative stop is floor(11000*.98)=10780, already above OPEN.
+    // Using that level instead of min(OPEN,stop) would invent better proceeds.
+    assert_eq!(r.fills[1].reason, ExecutionFillReasonV1::StopLoss);
+    assert_eq!(r.fills[1].phase, ExecutionPhaseV1::Range);
+    assert_eq!(r.fills[1].reference_price_paise, 10000);
+    assert_eq!(r.fills[1].fill_price_paise, 9000);
+    assert_eq!(r.summary.realized_pnl_paise, -4000);
+    assert_eq!(r.summary.total_slippage_paise, 4000);
+    assert_eq!(r.summary.ending_cash_paise, 96000);
+}
+
+#[test]
 fn target_limit_keeps_exact_target_despite_market_slippage() {
     let mut i = bracket_input();
     i.config.market_slippage_bps = 100;
