@@ -63,6 +63,9 @@ P2, release, deployment, broker operation or real-data processing is authorized.
 
 ## Handoff
 
-- Status: IN PROGRESS; validation results not yet recorded.
-- Evidence / local checks / CI / PR: pending execution.
+- Status: BLOCKED on approval to amend scope for a test-only macOS portability fix.
+- Evidence: `docs/p1-macos-validation.md`; all four synthetic imports PASS;
+  fmt/Clippy/WASM/native status and all web checks PASS; full Rust suite FAILS
+  (66 passed / one fixture-creation failure). No production code defect observed.
+- PR: https://github.com/kushalshah7/QuantOS/pull/7 to develop; final-head CI pending.
 - Owner reviewer acceptance: PENDING.

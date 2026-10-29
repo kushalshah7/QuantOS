@@ -180,7 +180,13 @@
   browser/WASM import, release or deployment. Acceptance covers this native CLI
   subtask only; aggregate P1 hands-on/reviewer requirements remain pending.
 
-## QOS-0006 / P1 acceptance evidence — REVIEW
+## QOS-0006 / P1 acceptance evidence — MERGED; aggregate P1 pending
+
+- Current GitHub metadata rechecked on 2026-10-29: PR #6's head
+  `8ec365d55d0faf7535e6c0c7f6183853dbc949f1` merged into `develop` as
+  `5b6a5005851b63224b4841a3d9dcdac4cf5cb7fa` on 2026-10-15.
+  This merged the documentation task; it does not establish aggregate P1 signoff.
+  The original implementation handoff below predates that merge.
 
 - Approved documentation-only task card pushed first as `e42371965f9dd83a2e542f22d9ebdec50e7dffd2`;
   clean isolated `feature/qos-0006-p1-acceptance` starts at exact required
@@ -207,3 +213,29 @@
   owner acceptance remain pending; macOS and browser/native-WASM runtime parity
   NOT RUN. No functional blocker found in this focused evidence audit. No P1-wide
   acceptance, merge, release, deployment or P2 work authorized/performed.
+
+## QOS-0007 / P1 personal-Mac validation — BLOCKED on test scope amendment
+
+- Owner requested the GitHub-to-next-task workflow on their Mac on 2026-10-29.
+  Fresh clone; existing `develop` and merged PR #6 verified. Approved bounded
+  validation card pushed first as `7170559c52898892a3454ff2e05d97487ffd75ef` on
+  `feature/qos-0007-macos-validation`; [PR #7](https://github.com/kushalshah7/QuantOS/pull/7)
+  targets `develop`. Main remains the documentation seed; no P0 restart.
+- [Dated Mac receipt](docs/p1-macos-validation.md) records exact environment,
+  commands, synthetic observations, local setup issue and remaining test blocker.
+  Installed pinned Rust 1.99.0, WASM target, Node 24.19.0 and npm 11.17.0 locally;
+  no tracked dependency/toolchain/workflow changes.
+- All four acceptance imports PASS at exact implementation SHA
+  `0568b5ec5b77e23e484baee012156557a81d8236`: full candles, UTC/paise values,
+  errors/exits, provenance, empty direct stderr, host-TZ independence and
+  unchanged fixture/lock hashes. Returned to the task branch afterward.
+- Local fmt, Clippy, WASM target, no-argument CLI, locked npm install, web lint,
+  typecheck, one web test and production build PASS. Ancestor Node 21.2.0 initially
+  shadowed pinned Node inside npm scripts; ignored local shim fixed resolution,
+  and all web checks were rerun with pinned Node.
+- Full Rust suite FAILS: 66 passed / one failed. The `#[cfg(unix)]` non-UTF8
+  filename fixture panics while creating a filename macOS rejects (OS error 92),
+  before CLI execution. Reproduced independently on both local filesystems.
+  Proposed one-test-file amendment is in the receipt; owner response pending.
+- No production/test source edits, real data, P1 owner acceptance, P2, merge,
+  release or deployment. Browser/native-WASM runtime parity NOT RUN.

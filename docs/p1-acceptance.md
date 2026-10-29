@@ -5,6 +5,12 @@ Evidence rechecked 2026-10-15 at implementation SHA
 `0568b5ec5b77e23e484baee012156557a81d8236` (accepted PR #5 squash merge).
 This documentation task grants no hands-on waiver, phase acceptance or P2 authority.
 
+**2026-10-29 verification update:** [Personal-Mac validation](p1-macos-validation.md)
+executed the synthetic checklist at that exact implementation SHA. All four import
+cases and web checks passed. A raw-byte filename fixture fails during file
+creation on macOS; the complete Rust run has 66 passes and one failure. Owner
+acceptance remains pending; green Ubuntu CI does not waive this local blocker.
+
 ## Scope and automated evidence
 
 The implemented native path is CSV bytes -> explicit normalization -> CLI JSON
@@ -55,15 +61,16 @@ accepted each listed head in instructions; this does not claim formal GitHub app
 | --- | --- |
 | Ubuntu implementation CI | PASSED at the implementation SHA; [Rust][R] and [web][W] jobs. |
 | Office-laptop runtime compilation/tests/builds/CLI | NOT RUN (LOW-RESOURCE); documentation task uses text/Git only. |
-| Manual personal-machine validation | NOT RUN; checklist below is for later execution. |
-| macOS | NOT RUN; Ubuntu CI is not macOS evidence. |
+| Manual personal-machine validation | Executed by Codex on the owner's Mac on 2026-10-29; all four synthetic imports matched expected values/exits/provenance. See the [dated receipt](p1-macos-validation.md); owner review remains pending. |
+| macOS | Rust suite FAILED (66 passed / one filename-fixture setup failure); formatting, Clippy, WASM target, native smoke and web checks passed. See the [dated receipt](p1-macos-validation.md). |
 | WASM target | Compilation PASSED via `cargo check -p quantos-wasm --target wasm32-unknown-unknown --locked` in [R]. |
 | Browser/native-WASM runtime parity | NOT RUN; browser import bindings/worker integration are unimplemented. |
 | Written owner reviewer acceptance | PENDING; supplying this checklist is not reviewer signoff. |
 
 MASTER_PLAN [section 1 item 9 and section 6](../MASTER_PLAN.md#6-milestones-and-approval-gates)
 require automated tests, hands-on validation and written reviewer acceptance.
-Accepted subtasks and Ubuntu CI leave the hands-on/reviewer gate pending. A separate
+Accepted subtasks, Ubuntu CI and recorded Mac imports leave the macOS test blocker
+and written reviewer gate pending. A separate
 explicit owner decision is required; aggregate P1 is not ACCEPTED/COMPLETE.
 Charts, browser bindings, backtesting, financial metrics and deployment remain
 unimplemented later-phase work; UI/WASM still expose P0 surfaces. Real historical
@@ -77,10 +84,13 @@ Owner reviewer checklist (all items pending; review/signoff NOT RUN):
 - [ ] Confirm the unchanged contracts, synthetic-only public examples and verification limits.
 - [ ] Write an explicit P1 acceptance/deferral decision; do not infer a waiver or authorize P2 here.
 
-## Later personal-machine checklist — every step NOT RUN
+## Original personal-machine checklist — historical NOT RUN instructions
 
 Use a clean personal-machine checkout and a POSIX shell; do not run this checklist
 on the office laptop. Commands below are instructions only, not executed evidence.
+These original QOS-0006 instructions and expected values are preserved below;
+their NOT RUN labels describe that historical documentation task. Actual
+2026-10-29 commands and observations are in the [Mac validation receipt](p1-macos-validation.md).
 
 1. **Checkout — NOT RUN.** Stop if the initial status shows local work. Fetch and
    detach at the exact implementation SHA; `rev-parse` must match it.
