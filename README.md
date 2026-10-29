@@ -4,11 +4,12 @@ An open-source, local-first quantitative finance terminal built around a shared
 Rust core, a separate WebAssembly adapter, and a React/TypeScript frontend.
 
 P1's native data path is implemented: CSV parsing, explicit candle normalization
-and JSON data-quality reports. The [P1 acceptance packet](docs/p1-acceptance.md)
-is ready for owner review. [Personal-Mac validation](docs/p1-macos-validation.md)
+and JSON data-quality reports. The owner accepted P1 on 2026-10-29; the
+[P1 acceptance packet](docs/p1-acceptance.md) records the decision and evidence.
+[Personal-Mac validation](docs/p1-macos-validation.md)
 ran on 2026-10-29: synthetic imports, all 68 Rust tests and web checks passed
-after an owner-approved test portability fix. Written aggregate P1
-owner acceptance remains pending. The browser UI/WASM adapter still expose P0
+after an owner-approved test portability fix. A [P2 execution-contract proposal](docs/backtest-execution-v1-draft.md)
+is being prepared for review; its financial choices are not approved. The browser UI/WASM adapter still expose P0
 surfaces. No financial engine, backtesting, charts, broker integration or
 deployment is implemented.
 No market datasets or broker credentials belong here.

@@ -51,18 +51,20 @@ Messages describe rules without echoing raw private cell values. P0 foundation
 status remains a build-stage string, not a backtest/normalizer result.
 
 The [P1 acceptance packet](p1-acceptance.md) records current implementation-base
-CI evidence and remaining hands-on/reviewer requirements. QOS-0002 specified the
+CI evidence, later Mac validation and the owner's P1 acceptance. QOS-0002 specified the
 unchanged contract/goldens; QOS-0003 implemented normalization, QOS-0004 CSV and
-QOS-0005 native CLI import. Aggregate P1 acceptance remains pending.
+QOS-0005 native CLI import. The owner accepted aggregate P1 on 2026-10-29;
+the packet records reviewed head da33ea0 and protected PR #7 merge 21ac348.
 
 `tests/normalization.rs` exercises all golden IDs/alternatives, structural and
 numeric/time boundary cases, deterministic issue serialization/messages, and
 isolated TZ=UTC/Asia/Kolkata subprocesses. Implementation-base Ubuntu CI executed
 the 20 normalization tests successfully; see the packet for actual output. Rust
 assertions transcribe hand-written goldens; CI does not execute Markdown or
-independently validate its arithmetic. Local runtime checks and macOS are NOT RUN.
-WASM target evidence is compilation only; browser/native-WASM normalization-result
-parity and personal-machine hands-on validation are NOT RUN.
+independently validate its arithmetic. Original implementation-local runtime checks
+were NOT RUN; the later [Mac receipt](p1-macos-validation.md) records the passing
+personal-machine checklist and full Rust suite. WASM target evidence is compilation
+only; browser/native-WASM normalization-result parity remains NOT RUN.
 
 ## QOS-0004 Rust-only CSV byte API
 
@@ -92,8 +94,8 @@ source and atomic parse/domain failures. Implementation-base Ubuntu CI executed
 the acceptance packet links the actual output. QOS-0004 local tests/builds were
 NOT RUN; historical formatter/text-check evidence remains in PROGRESS.md.
 No dependencies, lockfile, toolchain or workflow changed in QOS-0004. WASM remains
-compilation-only evidence; macOS and browser/native-WASM runtime parity NOT RUN.
-Hands-on validation and aggregate P1 acceptance remain pending.
+compilation-only evidence; browser/native-WASM runtime parity remains NOT RUN.
+Later Mac validation passed and the owner accepted aggregate P1; see the packet.
 
 ## QOS-0005 native CLI import
 
@@ -117,8 +119,10 @@ already locked packages. New subprocess tests use the actual built CLI with
 synthetic owned temporary files; output-write errors use an injected writer unit
 test. Existing CLI smoke/core suites are unchanged. Implementation-base Ubuntu
 CI executed 11 import tests and 2 output-writer unit tests successfully; see the
-acceptance packet for actual output. Local tests/builds/CLI execution remain
-NOT RUN; QOS-0006 performs text/Git checks only. Historical QOS-0005 formatter/
+acceptance packet for actual output. Original QOS-0005 local tests/builds/CLI were
+NOT RUN; QOS-0006 performed text/Git checks only. Later QOS-0007 Mac validation
+passed, including 12 amended native-path import tests. Historical QOS-0005 formatter/
 offline lock-resolution evidence remains in PROGRESS.md.
-No real dataset validation, broker/network feature, WASM/browser import, release,
-deployment or P1-wide acceptance. macOS/browser/native-WASM runtime parity NOT RUN.
+QOS-0005 added no real dataset validation, broker/network feature, WASM/browser
+import, release or deployment and did not itself grant P1 acceptance. The owner
+later accepted P1 through QOS-0007. Browser/native-WASM runtime parity remains NOT RUN.

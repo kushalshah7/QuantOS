@@ -1,7 +1,9 @@
 # Backtest constraints
 
-Status: inherited architectural invariants only. No P0 backtest engine, metrics,
-strategy, price conversion, fill model, or financial result exists.
+Status: inherited architectural invariants only; P1 data work is accepted, but
+no backtest engine, strategy, fill model or financial metric exists.
+[QOS-0008's execution-model draft](backtest-execution-v1-draft.md) proposes the
+next decisions for owner review; no new financial rule below is approved by it.
 
 1. Signals observe completed candles only; a close-derived signal cannot fill
    before the next bar's open. Future tests must prove no same-candle lookahead.

@@ -76,8 +76,8 @@ P2, release, deployment, broker operation or real-data processing is authorized.
 
 ## Handoff
 
-- Status: REVIEW; local Mac validation and fix-checkpoint Ubuntu CI PASS under
-  the owner's approved test-only amendment; no known functional blocker.
+- Status: ACCEPTED by the owner on 2026-10-29; local Mac validation and Ubuntu CI
+  PASS under the approved test-only amendment; no known functional blocker.
 - Evidence: `docs/p1-macos-validation.md`; all four synthetic imports PASS;
   fmt/Clippy/WASM/native status and all web checks PASS. Pre-amendment full Rust
   suite FAILED (66 passed / one fixture-creation failure); focused amended import
@@ -88,4 +88,8 @@ P2, release, deployment, broker operation or real-data processing is authorized.
   `40845132505` / push CI `40845123060` passed both quality jobs; actual Ubuntu
   logs confirm 12 import tests including retained raw-byte success and new Unicode
   success. Final documentation-handoff head/checks are recorded in PR #7.
-- Owner reviewer acceptance: PENDING.
+- Owner accepted exact final head `da33ea0e199afe4d732afe6f45dc874a2dc8981e` and
+  aggregate P1, explicitly authorizing its squash merge into develop. PR #7 merged
+  through the protected gate as `21ac34874550e89873f677cb395140e0ebbd957f`.
+  Required checks and resolved-conversation gate rechecked; no protection bypass.
+  Post-merge CI run `40864207895` succeeded at that exact merge SHA. No release/deploy.

@@ -1,5 +1,21 @@
 # QuantOS progress
 
+## Current phase gate — P1 ACCEPTED; P2 contract drafting only
+
+- On 2026-10-29 the owner explicitly accepted QOS-0007 and aggregate P1, approved
+  squash-merging reviewed head `da33ea0e199afe4d732afe6f45dc874a2dc8981e` into
+  develop, and authorized preparation of QOS-0008's execution contract for review.
+  This is the written chat decision, not a claimed formal GitHub approval.
+- PR #7 merged as `21ac34874550e89873f677cb395140e0ebbd957f`; exact head, green
+  required checks, no unresolved threads and clean protected gate rechecked.
+  No bypass. Local develop fast-forwarded; no direct develop commit.
+- [Post-merge CI](https://github.com/kushalshah7/QuantOS/actions/runs/40864207895)
+  succeeded at that exact merge SHA. P1 evidence includes the 68-test full Mac
+  Rust pass, web checks and four synthetic imports; browser/native-WASM financial
+  runtime parity remains NOT RUN. No release, deployment or real-data validation.
+- Earlier entries preserve their historical NOT RUN/pending states at the time;
+  current acceptance is the explicit decision above. P2 engine work is not approved.
+
 ## QOS-0001 / Phase 0 — ACCEPTED
 
 - Owner accepted PR head `9643c2c042b7f725a9ed69368f2551b6b6abb013` on
@@ -180,7 +196,7 @@
   browser/WASM import, release or deployment. Acceptance covers this native CLI
   subtask only; aggregate P1 hands-on/reviewer requirements remain pending.
 
-## QOS-0006 / P1 acceptance evidence — MERGED; aggregate P1 pending
+## QOS-0006 / P1 acceptance evidence — MERGED; historical packet
 
 - Current GitHub metadata rechecked on 2026-10-29: PR #6's head
   `8ec365d55d0faf7535e6c0c7f6183853dbc949f1` merged into `develop` as
@@ -214,7 +230,11 @@
   NOT RUN. No functional blocker found in this focused evidence audit. No P1-wide
   acceptance, merge, release, deployment or P2 work authorized/performed.
 
-## QOS-0007 / P1 personal-Mac validation — REVIEW
+## QOS-0007 / P1 personal-Mac validation — ACCEPTED
+
+- Owner accepted final head `da33ea0e199afe4d732afe6f45dc874a2dc8981e` and P1 on
+  2026-10-29; protected squash merge and post-merge evidence recorded at the top.
+  The implementation history below predates that separate acceptance decision.
 
 - Owner requested the GitHub-to-next-task workflow on their Mac on 2026-10-29.
   Fresh clone; existing `develop` and merged PR #6 verified. Approved bounded
@@ -258,3 +278,19 @@
   head/checks are recorded in PR #7; no functional blocker remains in this scope.
 - No production source/other test edits, real data, P1 owner acceptance, P2, merge,
   release or deployment. Browser/native-WASM runtime parity NOT RUN.
+
+## QOS-0008 / P2 execution-contract proposal — IN PROGRESS
+
+- Documentation-only drafting explicitly authorized; scope card pushed first as
+  `dd75e6cbeb71044a769653b62add8d809cb1dd10` on
+  `feature/qos-0008-p2-execution-contract`, based on accepted merge `21ac34874550e89873f677cb395140e0ebbd957f`.
+- Draft D01–D12 decisions and invented E01–E13 cases cover timing, integer
+  accounting, costs, liquidity, protection, gaps/terminal marking and overflow.
+  New financial choices remain DRAFT / NON-EXECUTABLE until owner approval.
+- Independent Python integer/Fraction assertions passed all numerical example
+  expectations. They did not run an engine, simulate fill timing, validate error
+  atomicity or prove strategy behavior. Local runtime suites NOT RERUN.
+- Current P1 status prose updated; financial contract/golden bodies and all
+  executable/build/data inputs stay unchanged. PR/final-head CI pending.
+- No engine/API implementation, indicator rules, broker calls, real data,
+  contract approval, P2 acceptance, release or deployment. Next step: owner review.

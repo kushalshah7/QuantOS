@@ -1,10 +1,11 @@
 # P1 personal-Mac validation — 2026-10-29
 
-**Result: Mac validation and Ubuntu CI PASSED; READY FOR OWNER REVIEW.**
+**Result: Mac validation and Ubuntu CI PASSED; P1 ACCEPTED on 2026-10-29.**
 All four synthetic acceptance imports, all 68 Rust workspace tests and the web
 quality suite passed. An initial fixture-creation failure was resolved through
-the owner's approved test-only amendment. P1 owner acceptance remains PENDING;
-no phase advancement, merge or deployment occurred.
+the owner's approved test-only amendment. The owner later accepted P1 and
+authorized PR #7's squash merge; see the closing record below. The validation
+implementation itself performed no phase advancement, merge or deployment.
 
 ## Checkout and environment
 
@@ -123,6 +124,9 @@ Actual Ubuntu Rust output confirms 12 import tests passed, including both the
 retained raw-byte success case and the new Unicode success case. The full Mac
 run instead executes the macOS read-error case plus Unicode success, both PASS.
 The final documentation-handoff head/checks are recorded in PR #7.
-Owner written P1 acceptance remains
-pending. Browser/native-WASM runtime parity is NOT RUN because
-browser import bindings remain unimplemented. No P2 work is authorized.
+The owner explicitly accepted P1 and authorized the reviewed head
+`da33ea0e199afe4d732afe6f45dc874a2dc8981e` to merge on 2026-10-29. Protected
+PR #7 squash merge: `21ac34874550e89873f677cb395140e0ebbd957f`; no bypass.
+Browser/native-WASM runtime parity remains NOT RUN because import bindings are
+unimplemented. QOS-0008 contract drafting is separately authorized; no P2 engine,
+release or deployment is authorized by this acceptance.
