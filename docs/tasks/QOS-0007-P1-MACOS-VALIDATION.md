@@ -4,6 +4,10 @@
   on their Mac and complete the next task. This executes the pending personal-
   machine checks in QOS-0006; the office-laptop LOW-RESOURCE restriction does
   not apply to this run. It does not grant aggregate P1 reviewer acceptance.
+- **Approved amendment (2026-10-29):** Owner selected "Fix the test and finish
+  validation" for the proposed one-test-file portability change. Preserve raw-
+  byte filename success coverage on other Unix targets, add Unicode filename
+  success coverage, and check sanitized errors for paths macOS rejects.
 - **Phase:** P1 verification only.
 - **Branch:** `feature/qos-0007-macos-validation`, from `origin/develop`
   `5b6a5005851b63224b4841a3d9dcdac4cf5cb7fa` (merged QOS-0006 / PR #6).
@@ -25,11 +29,13 @@ runtime/fixture/contract behavior is fixed; no new product phase is selected.
   preserve historical instructions, expected values, contracts and golden tables.
 - `PROGRESS.md` — accurate merged QOS-0006 status and compact QOS-0007 handoff.
 - `README.md` — current verification-status prose and link only.
+- `crates/quantos-cli/tests/import_cases/cases.rs` — only the approved native-path
+  portability tests; production code and contracts stay unchanged.
 - Install exact pinned Rust/Node/npm tools in the user's local tool directories;
   install locked dependencies/build outputs only in existing ignored directories.
   Synthetic temporary configs/reports/logs stay outside version control.
 
-No runtime, test, fixture, dependency, lockfile, toolchain, workflow, financial
+No runtime, other test, fixture, dependency, lockfile, toolchain, workflow, financial
 contract, governance or historical task-card changes. No real data or credentials.
 
 ## Execution and acceptance
@@ -52,21 +58,28 @@ contract, governance or historical task-card changes. No real data or credential
 6. Review exact changed paths/diff and sensitive patterns, commit/push verified
    checkpoints, open one PR to `develop`, inspect required CI at its final head,
    verify remote SHA and clean working tree, then stop for owner review.
+7. Under the approved amendment, restrict the existing raw-byte success fixture
+   to non-macOS Unix targets, add portable Unicode CSV/config path success and
+   macOS raw-byte path read-error assertions. Run the focused CLI import suite,
+   then full Rust fmt/Clippy/workspace tests/WASM checks. Existing successful web
+   checks remain valid while their inputs are unchanged. Inspect Ubuntu CI to
+   verify that raw-byte success coverage still executes there. No silent skips,
+   relaxed expectations, production-code changes or test waivers.
 
 ## Stop conditions
 
 Stop after two materially different diagnostic/fix attempts for an unavailable
 tool or failed check, immediately on push failure, or on any reproducible runtime
 defect or need to edit outside this allowlist. Report a focused follow-up; do not
-change dependencies or source to force a pass. No merge, P1 owner acceptance,
+change dependencies or production source to force a pass. No merge, P1 owner acceptance,
 P2, release, deployment, broker operation or real-data processing is authorized.
 
 ## Handoff
 
-- Status: BLOCKED on approval to amend scope for a test-only macOS portability fix.
+- Status: IN PROGRESS under the owner's approved test-only scope amendment.
 - Evidence: `docs/p1-macos-validation.md`; all four synthetic imports PASS;
-  fmt/Clippy/WASM/native status and all web checks PASS; full Rust suite FAILS
-  (66 passed / one fixture-creation failure). No production code defect observed.
+  fmt/Clippy/WASM/native status and all web checks PASS; pre-amendment full Rust
+  suite FAILED (66 passed / one fixture-creation failure). Amended tests pending.
 - PR: https://github.com/kushalshah7/QuantOS/pull/7 to develop, kept draft for the
   unresolved local failure. Evidence checkpoint
   `c66474b576c80e90d2a1576fa2af4b935fc672c3` passed both required Ubuntu jobs in
