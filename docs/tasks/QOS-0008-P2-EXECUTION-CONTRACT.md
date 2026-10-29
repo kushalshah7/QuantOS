@@ -90,6 +90,16 @@ contract/golden-body changes. Local arithmetic scratch work stays outside Git.
 
 ## Handoff
 
+- Current acceptance: on 2026-10-29 the owner delegated approval to proceed
+  within the strict scoped workflow. D01–D12 and E01–E13 were reviewed and
+  accepted at exact PR #8 head `0b8c5db63cdf8fa2d28383f557ed2475e1f5fbc2`.
+  Required checks, unchanged head and unresolved threads/protected gate were
+  rechecked; squash merge `56db214bfe040ea34901c303898e2381dbbd66ae` became
+  QOS-0009's exact base. No bypass or release. QOS-0009 separately locks and
+  implements the Rust interface; this acceptance is not aggregate P2 approval.
+- The drafting-only status and evidence below are historical, before this
+  separate acceptance decision; no code was introduced by PR #8 itself.
+
 - Status: REVIEW; explicit DRAFT/NON-EXECUTABLE proposal ready for owner review.
 - P1: owner accepted reviewed head above; PR #7 merged as exact branch base.
 - Local checks: Python integer/Fraction assertions passed numerical expectations
@@ -103,4 +113,4 @@ contract/golden-body changes. Local arithmetic scratch work stays outside Git.
 - PR: https://github.com/kushalshah7/QuantOS/pull/8 to develop; final documentation-
   handoff SHA/checks recorded in its description. Existing backtest invariants,
   P1 financial/schema/API/golden bodies and CSV/JSON fixtures preserved.
-- Next decision: owner review of the explicit P2 proposal; no engine authorization.
+- Historical next decision: owner review of the proposal, now resolved above.

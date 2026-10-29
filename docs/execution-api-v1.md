@@ -33,7 +33,8 @@ entry. A future JSON/browser decoder must lock its own rejection contract; this
 API does not claim to parse malformed JSON or unknown property types.
 
 Input schema_version must be exactly "1". Validation is deterministic first-error,
-not P1's aggregated JSON validation: version; config fields in declaration order; metadata.source; nonempty candles
+not P1's aggregated JSON validation: version; config fields in declaration order;
+metadata.source; nonempty candles
 and safe length; decisions count; then candles in input order, fields symbol,
 exchange, source, timestamp, numeric/range checks for open/high/low/close in that
 order, OHLC consistency, then volume. Identity/source
@@ -127,3 +128,14 @@ All cost/count/ID outputs obey safe-integer bounds. Any invariant failure return
 only Failure, never a panic or partial result. Input equality/serialized bytes,
 repeated result equality, valid-future prefix and prior-volume causality require
 tests. This API document alone is not execution evidence.
+
+## QOS-0009 implementation evidence
+
+`crates/quantos-core/src/execution.rs` exports the implemented entry; private
+arithmetic, validation and engine modules own its behavior. The 39 execution
+tests in `tests/execution_cases/` cover E01–E13, exact serialized success/error
+shape, causality, costs, rejected-fill state, overflow and input/TZ determinism.
+All 107 workspace Rust tests pass on the personal Mac, with fmt, Clippy and
+WASM target compile checks. [PR #9](https://github.com/kushalshah7/QuantOS/pull/9)
+contains the review/CI handoff. No browser execution, real-data result, strategy
+generation or aggregate P2 acceptance is claimed.

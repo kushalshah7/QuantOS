@@ -126,3 +126,31 @@ offline lock-resolution evidence remains in PROGRESS.md.
 QOS-0005 added no real dataset validation, broker/network feature, WASM/browser
 import, release or deployment and did not itself grant P1 acceptance. The owner
 later accepted P1 through QOS-0007. Browser/native-WASM runtime parity remains NOT RUN.
+
+## QOS-0009 Rust-only provided-signal execution API
+
+```rust
+pub fn execute_v1(
+    input: &quantos_core::execution::ExecutionInputV1,
+) -> quantos_core::execution::ExecutionResultV1;
+```
+
+The public path is `quantos_core::execution::execute_v1`; exact Serialize-only
+types, field names, enum/error strings and deterministic ordering are locked in
+[execution-api-v1.md](execution-api-v1.md). Input owns unchanged P1 normalized
+candles/provenance, explicit complete-bar/config declarations and a typed close
+decision for each bar. Revalidation precedes execution; no defaults, data repair,
+JSON decoder, file IO or environment access is introduced.
+
+The accepted [D01–D12 model](backtest-execution-v1-draft.md) defines next-OPEN
+orders, checked integer paise, explicit costs, previous-volume shared capacity,
+protective precedence and final CLOSE marking. Success contains ordered fills,
+audit events, reconciled close snapshots, exact input declarations and summary.
+Failure contains only version/status/error, even after earlier internal fills.
+
+QOS-0009 is under review in [PR #9](https://github.com/kushalshah7/QuantOS/pull/9).
+Mac evidence: 39 execution tests (all E01–E13 plus boundary/causality cases),
+107 total workspace Rust tests, fmt, Clippy and WASM target compilation pass.
+The P1 parser/normalizer integration test consumes the existing synthetic fixture
+without changing P1. No new dependency, CLI command, WASM export or UI surface.
+WASM evidence is compilation only; browser/native-WASM financial parity NOT RUN.

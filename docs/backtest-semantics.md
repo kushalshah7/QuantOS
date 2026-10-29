@@ -1,9 +1,11 @@
 # Backtest constraints
 
-Status: inherited architectural invariants only; P1 data work is accepted, but
-no backtest engine, strategy, fill model or financial metric exists.
-[QOS-0008's execution-model draft](backtest-execution-v1-draft.md) proposes the
-next decisions for owner review; no new financial rule below is approved by it.
+Status: P1 data work is accepted. The owner accepted the bounded
+[QOS-0008 execution model](backtest-execution-v1-draft.md) through PR #8 under
+2026-10-29 delegated approval. QOS-0009 implements that provided-signal model
+under the separate [locked Rust API](execution-api-v1.md), pending PR #9 review.
+The six inherited constraints below remain unchanged. Aggregate P2 acceptance,
+strategy generation, risk metrics and financial browser/WASM parity are pending.
 
 1. Signals observe completed candles only; a close-derived signal cannot fill
    before the next bar's open. Future tests must prove no same-candle lookahead.
@@ -24,3 +26,7 @@ The P2 work order must approve exact execution precedence, gap/last-bar behavior
 money and fee arithmetic/rounding, position sizing, adjustment treatment,
 calendar conventions, ledger reconciliation, and golden acceptance examples.
 P0 deliberately makes no choices for these unresolved financial semantics.
+
+For the first bounded kernel, D01–D12 resolve the approved execution choices;
+QOS-0009 locks types/errors and tests E01–E13. Calendars and performance metrics
+remain outside that scope. The P0 paragraph above records the original gate.

@@ -1,10 +1,14 @@
-# Proposed execution goldens — synthetic, hand-written, not engine output
+# Accepted execution goldens — synthetic, hand-written expectations
 
-**DRAFT / OWNER REVIEW REQUIRED.** These are invented acceptance examples for
-[the proposed v1 execution model](../../docs/backtest-execution-v1-draft.md).
-No engine, strategy, backtest or real-market result was run to produce them.
-Independent exact arithmetic checks validate numerical expectations only;
-future Rust tests must separately prove chronology, fills, errors and parity.
+**ACCEPTED EXPECTATIONS; RUST IMPLEMENTATION UNDER REVIEW.** These invented
+examples were accepted with [D01–D12](../../docs/backtest-execution-v1-draft.md)
+at PR #8 head `0b8c5db63cdf8fa2d28383f557ed2475e1f5fbc2`. No engine or market
+result was used to generate the hand-written expectations below. QOS-0009 now
+tests all E01–E13 independently in
+[`goldens.rs`](../../crates/quantos-core/tests/execution_cases/goldens.rs), with
+additional boundary/causality tests in
+[`edges.rs`](../../crates/quantos-core/tests/execution_cases/edges.rs): 39 execution
+tests pass on Mac. Browser/native-WASM financial parity remains NOT RUN.
 
 ## Common explicit example settings
 
@@ -14,13 +18,13 @@ declared prices, explicit `all_complete` and `as_supplied_no_cashflows` declarat
 OPEN timestamps are 0, 300000, 600000, ...; no bars are invented or missing.
 Unless overridden: initial cash 100000, quantity 2, fee_fixed 0, fee_bps 0,
 slippage_bps 0, participation_bps 10000, every volume 1000, both brackets null.
-These are **case-specific explicit values**, not proposed implicit API defaults.
+These are **case-specific explicit values**, not implicit API defaults.
 
 For plain market cases use bar 0 O/H/L/C = 10000/10100/9900/10000;
 bar 1 = 11000/11100/10900/11000; bar 2 = 12000/12100/11900/12000.
 `enter, exit, hold` means close decisions `enter_long, exit_long, hold`.
 
-| ID | Explicit variation and proposed expected observation |
+| ID | Explicit variation and accepted expected observation |
 | --- | --- |
 | E01 Next OPEN | Plain bars, decisions enter/exit/hold: no bar-0 fill; buy 2 at bar-1 OPEN 11000; sell 2 at bar-2 OPEN 12000. Cash after buy 78000; ending cash/equity 102000; realized 2000; unrealized 0. |
 | E02 Final decision | Only plain bar 0, decision enter: no following OPEN, so no fills; terminal decision expires; cash/equity 100000 and no position. |
@@ -77,7 +81,7 @@ cash after sell         = 89995+9999-1 = 99993
 P&L                     = -7 = -4 slippage -3 fees
 ```
 
-## Required behavioral assertions for the later implementation card
+## Required behavioral assertions implemented by QOS-0009
 
 - All E01–E13 numerical outcomes plus full ledger/config/provenance fields,
   explicit rejected/ignored/expired events and error atomicity.
@@ -89,6 +93,13 @@ P&L                     = -7 = -4 slippage -3 fees
   entry-bar protection and slippage/fee boundaries are tested separately.
 - Invalid identities, timestamps, normalization values, decisions/config types,
   zero/out-of-range computed prices/levels, unsafe integers and malformed
-  provenance produce complete failures according to the future locked API.
+  provenance produce complete failures according to the locked Rust API.
 - No test may claim an engine, browser/native-WASM financial parity, source rights
   or market performance from these Markdown examples or arithmetic scratch checks.
+
+The locked boundary is Rust-only and Serialize-only: required fields/enums and
+booleans enforce shape/types statically; runtime tests cover representable invalid
+values, counts and arithmetic. No malformed-JSON/unknown-property parser coverage
+is claimed. [The API](../../docs/execution-api-v1.md) fixes first-error ordering
+and exact result shapes. PR #9 records actual implementation CI; acceptance of
+these examples alone did not authorize any financial browser binding or P2 phase.

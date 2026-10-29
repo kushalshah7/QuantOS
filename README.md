@@ -8,10 +8,16 @@ and JSON data-quality reports. The owner accepted P1 on 2026-10-29; the
 [P1 acceptance packet](docs/p1-acceptance.md) records the decision and evidence.
 [Personal-Mac validation](docs/p1-macos-validation.md)
 ran on 2026-10-29: synthetic imports, all 68 Rust tests and web checks passed
-after an owner-approved test portability fix. A [P2 execution-contract proposal](docs/backtest-execution-v1-draft.md)
-is ready for owner review; its financial choices are not approved. The browser UI/WASM adapter still expose P0
-surfaces. No financial engine, backtesting, charts, broker integration or
-deployment is implemented.
+after an owner-approved test portability fix. The owner subsequently delegated
+approval to proceed within the scoped workflow; [D01–D12](docs/backtest-execution-v1-draft.md)
+were accepted through PR #8. [QOS-0009](docs/tasks/QOS-0009-P2-EXECUTION-KERNEL.md)
+implements a Rust-only provided-signal execution kernel, now under review in
+[PR #9](https://github.com/kushalshah7/QuantOS/pull/9). Its
+[typed API](docs/execution-api-v1.md) returns exact fills, accounting and atomic
+errors; all 107 Mac Rust tests pass, including 39 execution tests.
+The browser UI/WASM adapter still expose P0 surfaces. Strategy generation,
+financial CLI/browser bindings, charts, broker integration and deployment remain
+unimplemented; aggregate P2 acceptance is pending.
 No market datasets or broker credentials belong here.
 
 Native CSV import is now available through `quantos-cli import`; see the

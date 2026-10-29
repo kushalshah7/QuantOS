@@ -1,18 +1,21 @@
-# P2 execution model v1 — proposal for owner review
+# P2 execution model v1 — accepted bounded model
 
-**DRAFT / NON-EXECUTABLE.** QOS-0008 is authorized to prepare this document,
-not to approve its financial choices or implement an engine. P1 was accepted at
-PR #7 head `da33ea0e199afe4d732afe6f45dc874a2dc8981e`, merged into develop as
-`21ac34874550e89873f677cb395140e0ebbd957f`. Existing public APIs stay unchanged.
+**ACCEPTED MODEL; IMPLEMENTATION UNDER REVIEW.** On 2026-10-29 the owner delegated
+approval to proceed within the scoped workflow. D01–D12 and E01–E13 were reviewed
+at PR #8 head `0b8c5db63cdf8fa2d28383f557ed2475e1f5fbc2`, then protected
+squash-merged as `56db214bfe040ea34901c303898e2381dbbd66ae`. QOS-0009 separately
+locks the [Rust API](execution-api-v1.md) and implements it in
+[PR #9](https://github.com/kushalshah7/QuantOS/pull/9). This file retains its
+historical `-draft` path; aggregate P2 acceptance remains pending.
 
 The six [inherited constraints](backtest-semantics.md) remain authoritative.
-Every rule below is a **proposed** way to make those constraints executable.
+The rules below are the accepted bounded way to make those constraints executable.
 [Synthetic cases](../fixtures/synthetic/backtest-execution-cases.md) illustrate
-the proposal; their numbers are expectations, not measured strategy performance.
+the model; their numbers are acceptance expectations, not strategy performance.
 
-## Owner decisions to lock before implementation
+## Accepted owner decisions
 
-| ID | Proposed bounded choice | Why / limit |
+| ID | Accepted bounded choice | Why / limit |
 | --- | --- | --- |
 | D01 | First kernel: one symbol/exchange, long-only, one position, explicit per-bar signal decisions. | Test execution independently; no invented SMA/EMA/breakout rules or strategy DSL. |
 | D02 | Completed normalized 5m candles, strictly contiguous OPEN timestamps exactly 300000 ms apart. | Reject gaps rather than infer exchange sessions, repair bars or assume overnight execution. |
@@ -27,11 +30,11 @@ the proposal; their numbers are expectations, not measured strategy performance.
 | D11 | Explicit as-supplied corporate-action policy; echo provenance and warn about unknown/unadjusted treatment. | Do not infer splits/dividends, certify adjustment accuracy or claim redistribution rights. |
 | D12 | Checked exact arithmetic, atomic failure and reconciliation after every completed bar. | No wraparound, floating financial accounting or partial successful result after an error. |
 
-All D01–D12 need owner approval or amendment. Approval to draft is not approval of
-these choices. Calendars, indicators, strategy generation, risk/annualized metrics,
+All D01–D12 were accepted together; changing them requires an amended task.
+Calendars, indicators, strategy generation, risk/annualized metrics,
 CLI/WASM/browser entry points and broker models remain separate future tasks.
 
-## Proposed input boundary
+## Accepted input boundary
 
 Consume P1-compatible normalized candles plus their exact provenance and an
 explicit `all_complete` declaration. The caller's declaration is not verified
@@ -41,9 +44,9 @@ Require at least one candle and D02's contiguous grid; reject the entire input
 before processing orders if an invariant fails. No sorting, deduplication,
 resampling, timezone guessing, calendar lookup or missing-bar fabrication.
 
-Proposed required configuration (no implicit defaults):
+Required configuration (no implicit defaults):
 
-| Field | Proposed value / exact constraint |
+| Field | Accepted value / exact constraint |
 | --- | --- |
 | initial_cash_paise | Integer 1..M, where M = 9007199254740991. |
 | entry_quantity | Integer 1..M; every entry is this quantity, every exit closes the whole position. |
@@ -62,12 +65,11 @@ and `exit_long` while flat produce an ignored-decision audit event, not a fill.
 `hold` schedules nothing. A rejected order expires; it is not retried next bar
 unless a later completed-bar decision schedules a fresh order. No same-bar reentry.
 
-These are semantic field proposals, not a published JSON schema or Rust function.
-A later implementation card must lock exact public types, property validation,
-closed issue codes, deterministic issue/event order and serialization shapes.
-QOS-0008 adds none of them to the running application.
+These are accepted semantic fields; QOS-0009 separately locks exact Rust types,
+validation, closed issue codes, audit order and serialization in the API document.
+QOS-0008 itself added no runtime API or implementation. No JSON decoder is added.
 
-## Proposed exact money and cost arithmetic
+## Accepted exact money and cost arithmetic
 
 Use checked exact integers, with wider intermediates where necessary. All stored
 money/share/volume counts and externally serialized integers must be JS-safe;
@@ -99,7 +101,7 @@ price, with no adverse slippage that would violate the limit; normal fees apply.
 Market slippage is a declared penalty and is not clipped to the bar's HIGH/LOW;
 a modeled price can lie outside the recorded range. It is not an observed trade.
 
-Proposed bracket levels, fixed for the position from the successful entry price E:
+Accepted bracket levels, fixed for the position from the successful entry price E:
 
 ```text
 stop_price   = floor(E * (10000 - stop_loss_bps) / 10000)
@@ -109,7 +111,7 @@ target_price = ceil(E * (10000 + take_profit_bps) / 10000)
 Null disables that individual bracket. Out-of-range computed levels fail the run.
 No trailing stops, price-display rounding or changing brackets after entry.
 
-## Proposed chronology and finite-fill assumption
+## Accepted chronology and finite-fill assumption
 
 At each bar i > 0, capacity is floor(volume[i-1] * participation_bps / 10000).
 Successful buys and sells each consume their share quantity from this **shared**
@@ -117,7 +119,7 @@ bar budget. An order must fit in full and leave nonnegative cash; otherwise it
 is rejected without consuming capacity. This proxy uses only known history;
 it does not guarantee current liquidity or justify a best/worst-loss bound.
 
-Process in this exact proposed order:
+Process in this exact accepted order:
 
 1. For a position carried into the bar, check opening protection first. If OPEN
    <= stop, attempt a stop exit with reference OPEN. Otherwise if OPEN >= target,
@@ -143,7 +145,7 @@ invent tick time/order. The entry-bar stop reference handles an OPEN below the
 new stop after adverse entry slippage. Do not use the range or final volume to
 decide an earlier OPEN signal fill. Calendar/session-end/holiday logic is absent.
 
-## Proposed position, ledger and terminal accounting
+## Accepted position, ledger and terminal accounting
 
 One entry opens one position and one exit closes it entirely; no partial cost-
 basis allocation. Entry basis = executed buy notional + entry fee. On exit:
@@ -165,7 +167,7 @@ snapshot must satisfy the reconciliation above; count each fee once.
 
 At the final CLOSE, any open position remains marked, with entry fee in basis,
 no assumed sale and no hypothetical exit fee. A final-bar decision expires.
-The proposed output contains ledger/accounting summaries only. Sharpe, volatility,
+The output contains ledger/accounting summaries only. Sharpe, volatility,
 annualization, risk-free rates, exchange calendars and performance charts require
 separate approved contracts; no such metric is defined or claimed here.
 
@@ -174,15 +176,15 @@ Adjusted inputs retain their declaration, but the engine does not verify it or
 add cashflows. Do not describe raw/unknown-adjustment P&L as corporate-action-
 correct or certify data rights. Real historical datasets are outside this task.
 
-## Review and implementation gate
+## Implementation review gate
 
-Review D01–D12 together with cases E01–E13. In particular, approve or amend the
-strict contiguous-segment scope, previous-volume proxy, all-or-none fills,
-one-exit-attempt rule, target-gap policy and terminal marking before coding.
-They are proposed modeling choices, not recovered facts or approved defaults.
+D01–D12's contiguous-segment scope, previous-volume proxy, all-or-none fills,
+one-exit-attempt rule, target-gap policy and terminal marking were accepted as
+explicit modeling choices. They are not recovered market facts or implicit defaults.
 
-After the owner approves the financial proposal, a separate implementation card
-must lock Rust/API/error shapes and executable golden assertions. That task must
-prove chronology, prefix invariance for valid future data, accounting and error
-atomicity. This Markdown draft and its arithmetic checks cannot prove those
-runtime properties. No engine or P2 phase acceptance is authorized by this PR.
+QOS-0009 locked the API before code and now has 39 passing execution tests,
+including E01–E13, valid-future prefix invariance, exact costs, rejection behavior
+and atomic errors; all 107 Mac workspace Rust tests pass. Markdown and independent
+arithmetic checks alone did not establish those runtime properties. PR #9 remains
+at implementation review. Browser parity, strategies, metrics, real-data results
+and aggregate P2 acceptance remain outside this gate.
