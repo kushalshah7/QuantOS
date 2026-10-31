@@ -1,6 +1,6 @@
 # QuantOS progress
 
-## Current phase gate — P1 ACCEPTED; P2 contract drafting only
+## Current phase gate — P1 ACCEPTED; P2 model accepted, kernel in review
 
 - On 2026-10-29 the owner explicitly accepted QOS-0007 and aggregate P1, approved
   squash-merging reviewed head `da33ea0e199afe4d732afe6f45dc874a2dc8981e` into
@@ -13,8 +13,17 @@
   succeeded at that exact merge SHA. P1 evidence includes the 68-test full Mac
   Rust pass, web checks and four synthetic imports; browser/native-WASM financial
   runtime parity remains NOT RUN. No release, deployment or real-data validation.
-- Earlier entries preserve their historical NOT RUN/pending states at the time;
-  current acceptance is the explicit decision above. P2 engine work is not approved.
+- On 2026-10-29 the owner delegated approval to proceed within the strict scoped
+  workflow. D01–D12 / E01–E13 were reviewed and accepted at PR #8 head
+  `0b8c5db63cdf8fa2d28383f557ed2475e1f5fbc2`; protected squash merge
+  `56db214bfe040ea34901c303898e2381dbbd66ae` became QOS-0009's exact base.
+- QOS-0009's Rust-only provided-signal kernel is implemented and under review in
+  [PR #9](https://github.com/kushalshah7/QuantOS/pull/9). Mac: 107 Rust tests pass
+  (39 execution), fmt/Clippy/WASM target compile pass. Exact source checkpoint
+  and passing implementation CI are recorded in its entry below.
+- Earlier entries preserve historical NOT RUN/pending states. Aggregate P2
+  acceptance, strategy generation, financial CLI/browser bindings and runtime
+  browser/native-WASM parity remain pending. No release or deployment.
 
 ## QOS-0001 / Phase 0 — ACCEPTED
 
@@ -279,7 +288,11 @@
 - No production source/other test edits, real data, P1 owner acceptance, P2, merge,
   release or deployment. Browser/native-WASM runtime parity NOT RUN.
 
-## QOS-0008 / P2 execution-contract proposal — REVIEW
+## QOS-0008 / P2 execution-contract proposal — ACCEPTED
+
+- D01–D12 and E01–E13 accepted under the owner's delegated approval at exact
+  head/merge recorded above. Protected gate, required checks and conversations
+  rechecked before merge; no bypass. The drafting evidence below is historical.
 
 - Documentation-only drafting explicitly authorized; scope card pushed first as
   `dd75e6cbeb71044a769653b62add8d809cb1dd10` on
@@ -300,5 +313,40 @@
   and [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/40865579325).
   CI is unchanged-code regression evidence, not validation of the proposed model
   or Markdown arithmetic. Final documentation-handoff SHA/checks are in PR #8.
-- No engine/API implementation, indicator rules, broker calls, real data,
-  contract approval, P2 acceptance, release or deployment. Next step: owner review.
+- No engine/API implementation was introduced by PR #8. The separate approval
+  and QOS-0009 work order below followed it; no aggregate P2 acceptance or release.
+
+## QOS-0009 / Rust-only provided-signal execution kernel — REVIEW
+
+- Task scope and exact Serialize-only API pushed before code as
+  `6c5f05af02bb75e33bba2b0afaa6ab6f8bfd5d54` on
+  `feature/qos-0009-execution-kernel`; base is accepted PR #8 merge above.
+- Added `execution::execute_v1`, typed input/result/audit structures, input
+  revalidation, checked exact price/cost arithmetic, one-position state machine,
+  previous-volume shared capacity, protective precedence and reconciled close
+  marks. Errors return no partial report. Existing P1/foundation APIs unchanged.
+- Independent E01–E13 numerical assertions plus boundaries/causality are in
+  `crates/quantos-core/tests/execution_cases/`. One task-authorized read-only
+  reviewer found no source blocker; its entry-bar slipped-stop coverage suggestion
+  was added and passed. Main agent alone edited and shipped.
+- Pushed implementation `869307d05433c48ff9987f1a7bb16523b2140d96`, then final
+  test checkpoint `4b8aae566b4fc6856f1c560021e743cf953b4fd4`; both remote SHAs
+  verified. [PR #9](https://github.com/kushalshah7/QuantOS/pull/9) targets develop.
+- Mac PASS: `cargo test -p quantos-core --test execution --locked` initially
+  38/38; `cargo test --workspace --locked` after the final test 107/107, including
+  39 execution, 12 CLI import, 30 CSV and 20 normalization tests. Zero failures or
+  ignored tests. `cargo fmt --all -- --check`,
+  `cargo clippy --workspace --all-targets --locked -- -D warnings` and
+  `cargo check -p quantos-wasm --target wasm32-unknown-unknown --locked` PASS.
+- Both required jobs passed at final code SHA `4b8aae5` in
+  [PR CI](https://github.com/kushalshah7/QuantOS/actions/runs/40869656105) and
+  [push CI](https://github.com/kushalshah7/QuantOS/actions/runs/40869650711).
+  Actual PR output inspected: all 107 Rust tests, including 39 execution and
+  retained Unix raw-byte filename success; web lint/typecheck/one test/build pass.
+  Final documentation-handoff head/checks are recorded in PR #9's description.
+- Allowed-path, unchanged D01–D12/E01–E13 arithmetic, P1/build/dependency/CI inputs,
+  links, whitespace and sensitive-pattern checks passed. Only invented synthetic
+  test inputs; no private data, credentials or generated artifacts committed.
+- No known functional blocker. Stop at PR review; do not auto-merge or mark P2
+  accepted. No strategy generation, financial CLI/WASM/UI binding, broker call,
+  real-market result, release or deployment; WASM evidence is compilation only.
