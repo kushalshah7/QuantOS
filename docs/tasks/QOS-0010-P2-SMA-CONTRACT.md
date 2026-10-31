@@ -88,8 +88,9 @@ deployment or next task.
 
 ## Handoff
 
-- Status: PROPOSAL PREPARED; all SD01–SD10 strategy choices require review before
-  implementation. PR/final-head CI evidence pending.
+- Status: DOCUMENTATION REVIEW in
+  [PR #10](https://github.com/kushalshah7/QuantOS/pull/10) to develop. All
+  SD01–SD10 strategy choices remain PROPOSED; review precedes implementation.
 - Preflight PASS: PR #9 accepted head/merge match above; post-merge CI
   `41193789027` succeeded at the exact base with Rust/web jobs passing. Remote
   develop matches; no existing QOS-0010 task, branch, PR or output-path collision.
@@ -109,5 +110,11 @@ deployment or next task.
 - Immutability/allowlist/link/whitespace/secret checks PASS: exact nine Markdown
   paths; existing fenced API/formula/example blocks, six inherited backtest rules,
   earlier milestone evidence and QOS-0009's implementation work order unchanged;
-  40 local links/anchors resolve. Execution rules/API/goldens and all executable/
-  build/data inputs compare unchanged to the base. Final PR/SHA/CI: pending.
+  40 local links/anchors resolved at the proposal checkpoint. Execution rules/API/
+  goldens and all executable/build/data inputs compare unchanged to the base.
+- Proposal checkpoint `bbfb69fe35ea609cc9f88eace878eaa0908e6dd9` pushed and remote
+  SHA verified. PR #10's description records the final documentation-handoff head
+  and inspected required CI results. CI is unchanged-code regression evidence,
+  not execution/proof of the SMA strategy or these Markdown expectations.
+- No known preparation blocker. Stop at review; no strategy implementation,
+  financial-semantic approval, merge, aggregate P2 acceptance or release.

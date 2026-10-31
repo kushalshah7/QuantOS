@@ -384,5 +384,13 @@
 - Local runtime suites/builds/CLI: NOT RUN (LOW-RESOURCE). No installed tooling,
   private data, production/test/dependency/CI changes or new public API. Existing
   CI is regression evidence only; it cannot prove the proposal or its Markdown.
-- Proposal checkpoint, PR and final-head required CI: pending handoff. Stop at
-  strategy review; no merge, implementation, aggregate P2 acceptance or release.
+- Exact nine-path Markdown allowlist, immutable existing API/formula/example
+  blocks, earlier evidence, execution rules/goldens and executable/build inputs,
+  links, whitespace and sensitive-pattern checks PASS. The proposal checkpoint
+  resolved 40 local links/anchors; no private/generated data was staged.
+- Proposal checkpoint `bbfb69fe35ea609cc9f88eace878eaa0908e6dd9` pushed and remotely
+  verified; [PR #10](https://github.com/kushalshah7/QuantOS/pull/10) targets develop.
+  Its description records final documentation-handoff SHA/required CI results.
+  CI is regression evidence only, not a strategy/Markdown arithmetic check.
+- No preparation blocker. Stop at strategy review; no merge, implementation,
+  aggregate P2 acceptance, release or deployment.
