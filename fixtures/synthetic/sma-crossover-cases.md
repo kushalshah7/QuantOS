@@ -1,10 +1,26 @@
-# Proposed SMA acceptance cases — invented, not strategy output
+# Accepted SMA cases — invented acceptance expectations
 
-**DRAFT / STRATEGY REVIEW REQUIRED / NON-EXECUTABLE.** These are hand-written
-expectations for [SD01–SD10](../../docs/strategy-sma-v1-draft.md), not results
-from a strategy implementation, engine run or historical dataset. Bounded
-Python integer/Fraction assertions independently check arithmetic; they cannot
-prove that an unimplemented strategy satisfies the proposal.
+**SC01–SC13 ACCEPTED; QOS-0011 IMPLEMENTATION AWAITING REVIEW.** The owner approved
+these expectations and [SD01–SD10](../../docs/strategy-sma-v1-draft.md) at
+QOS-0010 head `43a4577f25c41dcdbb60d9b6170355f683fef6ee`, merged as
+`fcd55862fac170c3326da5850b2b0e9c031c1274`. The original hand-derived traces,
+proposal wording and preparation limits below are preserved as historical
+evidence. QOS-0010's integer/Fraction checks were arithmetic checks only.
+[QOS-0011](../../docs/tasks/QOS-0011-P2-SMA-STRATEGY.md) now adds executable
+Rust assertions under `crates/quantos-core/tests/sma_cases/`, including actual
+kernel composition; its handoff records CI evidence separately. These are
+invented inputs, with no dataset or profitability claim. Rust-unconstructible
+invalid values and mathematically unreachable valid-input overflow are not
+claimed as generator runtime rejection tests.
+
+At QOS-0011 source checkpoint `bcd6bfa9cb18d0fb6084da06fa5b580e6fc52332`,
+[CI 41247455570](https://github.com/kushalshah7/QuantOS/actions/runs/41247455570)
+actually passed all 25 SMA tests. `goldens.rs` covers SC01–SC08;
+`validation.rs` covers representable SC09–SC11; `properties.rs` covers SC12,
+independent direct windows and preservation; `composition.rs` covers SC13,
+SC05 expiry and SC04 ignored repeated decisions. The numerical traces below
+remain the accepted hand-derived expectations. No local runtime check was run;
+CI does not separately parse or execute this Markdown.
 
 ## Explicit example conventions
 

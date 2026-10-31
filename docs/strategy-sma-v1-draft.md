@@ -1,9 +1,15 @@
-# SMA crossover v1 — proposed strategy contract
+# SMA crossover v1 — accepted strategy contract
 
-**DRAFT / NON-EXECUTABLE / STRATEGY APPROVAL REQUIRED.** QOS-0010 authorizes
-documentation preparation only. Every SD choice below is PROPOSED, including
-the recommended crossover/equality convention. No strategy, indicator API or
-backtest has been implemented or run by this task.
+**ACCEPTED CONTRACT; QOS-0011 IMPLEMENTATION AWAITING REVIEW.** The owner approved
+SD01–SD10 and SC01–SC13 at reviewed QOS-0010 head
+`43a4577f25c41dcdbb60d9b6170355f683fef6ee`; PR #10 merged as
+`fcd55862fac170c3326da5850b2b0e9c031c1274`. The separate
+[QOS-0011 work order](tasks/QOS-0011-P2-SMA-STRATEGY.md) authorizes the
+[Rust-only API](strategy-sma-api-v1.md), now implemented for review in
+[PR #11](https://github.com/kushalshah7/QuantOS/pull/11).
+The proposal wording below records QOS-0010's original preparation; its choices,
+formulas and examples are preserved. QOS-0010 itself ran no strategy. Aggregate
+P2 acceptance and browser financial parity remain pending.
 
 The accepted [execution model](backtest-execution-v1-draft.md) and
 [Rust execution API](execution-api-v1.md) remain unchanged. The owner accepted

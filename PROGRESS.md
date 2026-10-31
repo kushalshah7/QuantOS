@@ -1,6 +1,6 @@
 # QuantOS progress
 
-## Current phase gate — P1 ACCEPTED; P2 kernel accepted, SMA drafting only
+## Current phase gate — P1 ACCEPTED; P2 kernel/SMA contract accepted, QOS-0011 review
 
 - On 2026-10-29 the owner explicitly accepted QOS-0007 and aggregate P1, approved
   squash-merging reviewed head `da33ea0e199afe4d732afe6f45dc874a2dc8981e` into
@@ -28,12 +28,18 @@
 - QOS-0009's recorded Mac evidence remains 107 Rust tests passing
   (39 execution), fmt/Clippy/WASM target compile pass. Exact source checkpoint
   and passing implementation CI are recorded in its entry below.
-- The owner authorized QOS-0010 documentation preparation only, on the accepted
-  merge above. [Proposed SMA choices](docs/strategy-sma-v1-draft.md) and invented
-  cases require review before a separate implementation card. No new strategy
-  semantics, P2 acceptance, release or deployment is approved.
+- The owner accepted QOS-0010's [SD01–SD10](docs/strategy-sma-v1-draft.md) and
+  SC01–SC13 at reviewed head `43a4577f25c41dcdbb60d9b6170355f683fef6ee`, authorizing
+  PR #10's protected squash merge as `fcd55862fac170c3326da5850b2b0e9c031c1274`.
+  [Exact-merge CI](https://github.com/kushalshah7/QuantOS/actions/runs/41197152381)
+  passed Rust/web jobs. That merge approved the contract only; local runtime
+  checks at its merge handoff were NOT RUN.
+- On 2026-11-01 the owner separately authorized bounded Rust-only QOS-0011.
+  [Its card](docs/tasks/QOS-0011-P2-SMA-STRATEGY.md) and API lock were pushed
+  before code. Implementation and executable synthetic tests are now awaiting
+  review in [PR #11](https://github.com/kushalshah7/QuantOS/pull/11).
 - Earlier entries preserve historical NOT RUN/pending states. Aggregate P2
-  acceptance, strategy generation, financial CLI/browser bindings and runtime
+  acceptance, financial CLI/browser bindings and runtime
   browser/native-WASM parity remain pending. No release or deployment.
 
 ## QOS-0001 / Phase 0 — ACCEPTED
@@ -394,3 +400,42 @@
   CI is regression evidence only, not a strategy/Markdown arithmetic check.
 - No preparation blocker. Stop at strategy review; no merge, implementation,
   aggregate P2 acceptance, release or deployment.
+
+## QOS-0011 / Rust-only SMA signal generator — IMPLEMENTATION REVIEW
+
+- Owner's 2026-11-01 request separately authorized this bounded implementation
+  of accepted SD01–SD10 / SC01–SC13. Exact base
+  `fcd55862fac170c3326da5850b2b0e9c031c1274`; branch
+  `feature/qos-0011-sma-strategy`; [PR #11](https://github.com/kushalshah7/QuantOS/pull/11)
+  targets develop. One agent. Aggregate P2 acceptance remains pending.
+- [Scope card](docs/tasks/QOS-0011-P2-SMA-STRATEGY.md) and
+  [API lock](docs/strategy-sma-api-v1.md) pushed first at
+  `11c465f44cb692e06912f4688f8a0cbc67fb6a9f`. Accepted PR #10 head/merge,
+  approval and successful exact-merge CI `41197152381` were verified before work;
+  remote base matched and no prior QOS-0011 branch/task/PR or path collision existed.
+- Source/test checkpoint `bcd6bfa9cb18d0fb6084da06fa5b580e6fc52332` pushed.
+  New `sma::generate_sma_v1` validates all input, uses checked u128 rolling
+  arithmetic and returns pure portfolio-independent completed-bar decisions.
+  Existing P1/execution APIs, sources/tests and all build inputs remain unchanged.
+  No financial CLI/WASM/UI binding, decoder or dependency was added.
+- Actual [PR CI 41247455570](https://github.com/kushalshah7/QuantOS/actions/runs/41247455570)
+  and [push CI 41247440623](https://github.com/kushalshah7/QuantOS/actions/runs/41247440623)
+  passed both quality jobs at that source SHA. Inspected PR steps/logs show fmt,
+  Clippy, 132 Rust tests (107 existing + 25 SMA), WASM compilation and web
+  lint/typecheck/one test/build passing. New tests include applicable SC01–SC13,
+  729 small direct-window patterns with 15 period pairs, exact wide boundaries,
+  deterministic atomic errors, preservation/prefix checks and actual kernel
+  composition/ledger/rejection/final expiry. CI executes these Rust assertions;
+  QOS-0010's earlier arithmetic checks did not execute a strategy.
+- Local PASS: new-source/test formatting with existing rustfmt, bounded path/
+  immutable-text/link/whitespace/sensitive-content checks and diff review.
+  Local compilation, suites, builds, product CLI and runtime checks: **NOT RUN**
+  under the owner's LOW-RESOURCE override. No installations, benchmarks or datasets.
+- An isolated worktree preserved the owner checkout's tracked execution-document
+  modification and untracked Market-Data/. No owner contents were inspected,
+  copied, cleaned, stashed or overwritten. No private/generated data was staged.
+- PR #11's description records the final documentation-head SHA, remote equality
+  and inspected final-head CI evidence. Historical Mac checks cover P1/the kernel;
+  this SMA's evidence is CI. Browser/native-WASM financial runtime parity remains
+  unverified. No known implementation blocker; stop for owner review. No merge,
+  further strategy/phase acceptance, release or deployment.

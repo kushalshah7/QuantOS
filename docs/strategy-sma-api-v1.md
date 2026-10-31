@@ -129,3 +129,19 @@ Strategy code never executes trades. Tests alone may compose the generated vecto
 with unchanged execute_v1 to prove SC13 next-OPEN/rejection/accounting and SC05
 terminal expiry. Local runtime checks are NOT RUN under the owner override;
 actual test/CI evidence must be recorded separately after execution in GitHub CI.
+
+## Implementation review evidence
+
+[PR #11](https://github.com/kushalshah7/QuantOS/pull/11) implements this interface
+in `crates/quantos-core/src/sma.rs` and `src/sma/`. Its 25 SMA tests under
+`tests/sma_cases/` cover applicable SC01–SC13: literal vectors/public JSON shapes,
+validation order/atomicity, exact arithmetic boundaries, direct-window reference
+comparisons, input/prefix/non-CLOSE invariants and unchanged-kernel composition.
+
+At source checkpoint `bcd6bfa9cb18d0fb6084da06fa5b580e6fc52332`,
+[PR CI 41247455570](https://github.com/kushalshah7/QuantOS/actions/runs/41247455570)
+and push CI `41247440623` passed both quality jobs. Inspected PR logs show 132
+Rust tests passing, including 25 SMA and the unchanged 39 execution tests, and
+one web test. Final documentation-head evidence is recorded in the PR description.
+Local runtime checks remain NOT RUN; recorded earlier Mac tests do not validate
+this SMA implementation. Owner review and aggregate P2 acceptance remain pending.

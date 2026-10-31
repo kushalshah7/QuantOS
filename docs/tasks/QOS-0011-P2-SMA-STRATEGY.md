@@ -85,7 +85,9 @@ does not prove browser financial parity. Local runtime checks remain NOT RUN.
 
 ## Handoff
 
-- Status: IN PROGRESS; scope/API lock prepared before implementation.
+- Status: IMPLEMENTED, AWAITING OWNER REVIEW in
+  [PR #11](https://github.com/kushalshah7/QuantOS/pull/11) to develop. No merge or
+  aggregate P2 acceptance is authorized.
 - Preflight PASS: accepted PR #10 head/merge/approval match above; exact-merge CI
   `41197152381` succeeded at the base with both Rust/web jobs. Remote develop
   matches; no QOS-0011 task/branch/PR or new-output-path collision existed.
@@ -93,5 +95,28 @@ does not prove browser financial parity. Local runtime checks remain NOT RUN.
   `docs/backtest-execution-v1-draft.md` and untracked Market-Data/. Neither was
   read for private contents, copied or modified. Implementation uses a separate
   clean Git worktree at the accepted base, with no setup/install scripts.
-- Source/tests, formatting/text checks, final PR/SHA/CI: pending actual work.
+- Scope/API checkpoint `11c465f44cb692e06912f4688f8a0cbc67fb6a9f` was pushed
+  and remotely verified before source edits. Implementation checkpoint
+  `bcd6bfa9cb18d0fb6084da06fa5b580e6fc52332` was committed/pushed immediately.
+- Implementation CI PASS: [PR run 41247455570](https://github.com/kushalshah7/QuantOS/actions/runs/41247455570)
+  and [push run 41247440623](https://github.com/kushalshah7/QuantOS/actions/runs/41247440623)
+  both succeeded at that exact source SHA. PR job steps/logs were inspected:
+  fmt, Clippy with warnings denied, 132 Rust tests (107 existing + 25 SMA),
+  WASM target compilation; web lint/typecheck, one test and build passed.
+- The 25 SMA tests assert applicable SC01–SC13 vectors/boundaries/errors,
+  direct-window reference comparisons on 729 six-bar patterns and all 15 period
+  pairs, near-M/maximum-period arithmetic, deterministic serialization/input
+  preservation, prefixes/non-CLOSE mutations, actual SC13 ledger/rejection and
+  SC05 terminal expiry. No public overflow injection or decoder is present.
+- Local PASS: existing rustfmt check on only the new SMA source/test roots;
+  allowlist, immutable tables/fences/inherited rules/history, links, whitespace
+  and staged sensitive-content inspection. No owner files entered the task tree.
+- Final documentation-head SHA, remote equality and required CI/log results are
+  recorded in PR #11's description after the final push, avoiding a self-referential
+  evidence commit. The source checkpoint above identifies the implemented code.
 - Local runtime checks: NOT RUN under the explicit LOW-RESOURCE override.
+- CI runs the executable synthetic assertions; QOS-0010's earlier Python checks
+  were arithmetic-only. Historical Mac results cover the earlier kernel/P1, not
+  this SMA implementation. Browser/native-WASM financial runtime parity remains
+  unverified; WASM compilation alone does not establish it. No known implementation
+  blocker at handoff; owner review remains required.
