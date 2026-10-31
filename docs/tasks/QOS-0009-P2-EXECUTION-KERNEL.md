@@ -1,6 +1,10 @@
 # QOS-0009 — Rust-only deterministic execution kernel
 
-- **Status:** APPROVED under the owner's 2026-10-29 delegated approval to proceed
+- **Status:** ACCEPTED by the owner's explicit 2026-10-31 acceptance of reviewed
+  head `6c4720566ea919eaf50221ccff0fc7e107c3eef3` and authorization to squash-merge
+  PR #9. Merge `b4ee5eb9c6321fbc33e0c7c0a26b9aee5fc909df`; kernel only,
+  aggregate P2 acceptance pending.
+- **Original implementation authorization:** the owner's 2026-10-29 delegation to proceed
   within the established strict scoped workflow. QOS-0008 D01–D12 were reviewed
   and accepted at head `0b8c5db63cdf8fa2d28383f557ed2475e1f5fbc2`; protected
   squash merge `56db214bfe040ea34901c303898e2381dbbd66ae` is this task's base.
@@ -88,8 +92,17 @@ Do not merge this implementation PR as an unattended follow-on or mark P2 accept
 
 ## Handoff
 
-- Status: REVIEW in [PR #9](https://github.com/kushalshah7/QuantOS/pull/9) to develop;
-  implementation complete, aggregate P2 acceptance pending. Do not auto-merge.
+- Status: ACCEPTED. [PR #9](https://github.com/kushalshah7/QuantOS/pull/9) was
+  squash-merged through the normal protected gate on 2026-10-31 at the owner's
+  explicit instruction. Accepted head `6c4720566ea919eaf50221ccff0fc7e107c3eef3`;
+  merge `b4ee5eb9c6321fbc33e0c7c0a26b9aee5fc909df`. Head/base, required checks
+  and conversations/protection were rechecked; no bypass or auto-merge.
+- Exact-merge [post-merge CI](https://github.com/kushalshah7/QuantOS/actions/runs/41193789027)
+  PASS: Rust/web jobs and every step succeeded; actual output confirms 107 Rust
+  tests (39 execution) and one web test. Remote/local develop verified at the
+  merge; local fast-forward preserved owner files, including untracked Market-Data/.
+  Merge-handoff local runtime checks NOT RUN. No release/deployment or P2 acceptance.
+- Implementation evidence below is historical, before that separate acceptance.
 - Source/model approval: accepted PR #8 head/merge above; owner delegation recorded.
 - Scope/API lock pushed first: `6c5f05af02bb75e33bba2b0afaa6ab6f8bfd5d54`.
   Implementation `869307d05433c48ff9987f1a7bb16523b2140d96`; final test checkpoint

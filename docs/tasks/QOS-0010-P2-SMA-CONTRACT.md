@@ -88,12 +88,26 @@ deployment or next task.
 
 ## Handoff
 
-- Status: IN PROGRESS; proposed contract/cases and final PR evidence pending.
+- Status: PROPOSAL PREPARED; all SD01–SD10 strategy choices require review before
+  implementation. PR/final-head CI evidence pending.
 - Preflight PASS: PR #9 accepted head/merge match above; post-merge CI
   `41193789027` succeeded at the exact base with Rust/web jobs passing. Remote
   develop matches; no existing QOS-0010 task, branch, PR or output-path collision.
 - Working checkout was develop at the exact base, with only untracked
   `Market-Data/`; creating this branch changes no tracked tree contents. No owner
   data/prompts inspected, moved, stashed, cleaned or overwritten.
-- Local runtime checks: NOT RUN under this task's LOW-RESOURCE mandate.
-- Proposed semantics, arithmetic/immutability checks, remote SHA and PR: pending.
+- Scope card pushed first as `529775f45b4bcf6e120ba2cd4ad139fcdeefaf47`, remotely
+  verified before drafting the proposal/cases.
+- Prepared the proposed close-only SMA model and SC01–SC13 invented case families.
+  Bounded stdin-only Python integer/Fraction assertions PASS: 33 SC01–SC06
+  numeric trace rows, SC07/SC12 boundary/suffix rows, period endpoints, one-unit
+  near-M comparisons, symbolic u128 bounds, all nonempty prefixes and hand-derived
+  SC13 cash/equity/capacity arithmetic. No reference script or generated data
+  is committed.
+- Local runtime checks: NOT RUN under this task's LOW-RESOURCE mandate. Arithmetic
+  assertions are not strategy/kernel execution or error/mutation/parity tests.
+- Immutability/allowlist/link/whitespace/secret checks PASS: exact nine Markdown
+  paths; existing fenced API/formula/example blocks, six inherited backtest rules,
+  earlier milestone evidence and QOS-0009's implementation work order unchanged;
+  40 local links/anchors resolve. Execution rules/API/goldens and all executable/
+  build/data inputs compare unchanged to the base. Final PR/SHA/CI: pending.
