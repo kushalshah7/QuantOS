@@ -1,6 +1,6 @@
 # QuantOS progress
 
-## Current phase gate — P1 ACCEPTED; P2 model accepted, kernel in review
+## Current phase gate — P1 ACCEPTED; P2 kernel accepted, SMA drafting only
 
 - On 2026-10-29 the owner explicitly accepted QOS-0007 and aggregate P1, approved
   squash-merging reviewed head `da33ea0e199afe4d732afe6f45dc874a2dc8981e` into
@@ -17,10 +17,21 @@
   workflow. D01–D12 / E01–E13 were reviewed and accepted at PR #8 head
   `0b8c5db63cdf8fa2d28383f557ed2475e1f5fbc2`; protected squash merge
   `56db214bfe040ea34901c303898e2381dbbd66ae` became QOS-0009's exact base.
-- QOS-0009's Rust-only provided-signal kernel is implemented and under review in
-  [PR #9](https://github.com/kushalshah7/QuantOS/pull/9). Mac: 107 Rust tests pass
+- On 2026-10-31 the owner explicitly accepted QOS-0009 head
+  `6c4720566ea919eaf50221ccff0fc7e107c3eef3` and authorized the protected squash
+  merge of [PR #9](https://github.com/kushalshah7/QuantOS/pull/9) as
+  `b4ee5eb9c6321fbc33e0c7c0a26b9aee5fc909df`. Kernel only; no aggregate P2 approval.
+  [Exact-merge CI](https://github.com/kushalshah7/QuantOS/actions/runs/41193789027)
+  passed both jobs/all steps; actual output shows 107 Rust and one web test passing.
+  Remote/local develop verified and local fast-forward preserved owner work.
+  Merge-handoff local runtime checks NOT RUN.
+- QOS-0009's recorded Mac evidence remains 107 Rust tests passing
   (39 execution), fmt/Clippy/WASM target compile pass. Exact source checkpoint
   and passing implementation CI are recorded in its entry below.
+- The owner authorized QOS-0010 documentation preparation only, on the accepted
+  merge above. [Proposed SMA choices](docs/strategy-sma-v1-draft.md) and invented
+  cases require review before a separate implementation card. No new strategy
+  semantics, P2 acceptance, release or deployment is approved.
 - Earlier entries preserve historical NOT RUN/pending states. Aggregate P2
   acceptance, strategy generation, financial CLI/browser bindings and runtime
   browser/native-WASM parity remain pending. No release or deployment.
@@ -316,7 +327,10 @@
 - No engine/API implementation was introduced by PR #8. The separate approval
   and QOS-0009 work order below followed it; no aggregate P2 acceptance or release.
 
-## QOS-0009 / Rust-only provided-signal execution kernel — REVIEW
+## QOS-0009 / Rust-only provided-signal execution kernel — ACCEPTED
+
+- Explicit owner acceptance/merge and exact-merge CI are recorded above. The
+  implementation evidence below is historical, before that separate acceptance.
 
 - Task scope and exact Serialize-only API pushed before code as
   `6c5f05af02bb75e33bba2b0afaa6ab6f8bfd5d54` on
@@ -347,6 +361,36 @@
 - Allowed-path, unchanged D01–D12/E01–E13 arithmetic, P1/build/dependency/CI inputs,
   links, whitespace and sensitive-pattern checks passed. Only invented synthetic
   test inputs; no private data, credentials or generated artifacts committed.
-- No known functional blocker. Stop at PR review; do not auto-merge or mark P2
-  accepted. No strategy generation, financial CLI/WASM/UI binding, broker call,
+- No known functional blocker at the original PR review handoff; owner acceptance
+  followed separately as recorded above. No strategy generation, financial CLI/
+  WASM/UI binding, broker call,
   real-market result, release or deployment; WASM evidence is compilation only.
+
+## QOS-0010 / proposed SMA crossover contract — DOCUMENTATION REVIEW
+
+- Owner explicitly authorized documentation preparation only on 2026-10-31;
+  [task card](docs/tasks/QOS-0010-P2-SMA-CONTRACT.md) pushed first as
+  `529775f45b4bcf6e120ba2cd4ad139fcdeefaf47`, remotely verified before drafting.
+  Branch `feature/qos-0010-sma-contract` is based on exact accepted QOS-0009
+  merge `b4ee5eb9c6321fbc33e0c7c0a26b9aee5fc909df`; one agent, owner work preserved.
+- [Draft SD01–SD10](docs/strategy-sma-v1-draft.md) propose explicit bounded
+  fast/slow periods, exact rolling sums/fractions, equality-based crossings,
+  first-availability Hold, state-independent decisions, deterministic atomic
+  validation and unchanged next-OPEN kernel composition. None is strategy approval.
+- [SC01–SC13](fixtures/synthetic/sma-crossover-cases.md) are invented mathematical
+  expectations. Bounded stdin-only Python integer/Fraction assertions PASS for
+  numeric traces, invalid-period/grid conditions, wide bounds, future prefixes
+  and integration cash/equity/capacity arithmetic. No strategy or kernel was executed.
+- Local runtime suites/builds/CLI: NOT RUN (LOW-RESOURCE). No installed tooling,
+  private data, production/test/dependency/CI changes or new public API. Existing
+  CI is regression evidence only; it cannot prove the proposal or its Markdown.
+- Exact nine-path Markdown allowlist, immutable existing API/formula/example
+  blocks, earlier evidence, execution rules/goldens and executable/build inputs,
+  links, whitespace and sensitive-pattern checks PASS. The proposal checkpoint
+  resolved 40 local links/anchors; no private/generated data was staged.
+- Proposal checkpoint `bbfb69fe35ea609cc9f88eace878eaa0908e6dd9` pushed and remotely
+  verified; [PR #10](https://github.com/kushalshah7/QuantOS/pull/10) targets develop.
+  Its description records final documentation-handoff SHA/required CI results.
+  CI is regression evidence only, not a strategy/Markdown arithmetic check.
+- No preparation blocker. Stop at strategy review; no merge, implementation,
+  aggregate P2 acceptance, release or deployment.

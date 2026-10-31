@@ -148,9 +148,17 @@ protective precedence and final CLOSE marking. Success contains ordered fills,
 audit events, reconciled close snapshots, exact input declarations and summary.
 Failure contains only version/status/error, even after earlier internal fills.
 
-QOS-0009 is under review in [PR #9](https://github.com/kushalshah7/QuantOS/pull/9).
+The owner accepted QOS-0009 reviewed head `6c4720566ea919eaf50221ccff0fc7e107c3eef3`
+on 2026-10-31; [PR #9](https://github.com/kushalshah7/QuantOS/pull/9) was
+protected-squash-merged as `b4ee5eb9c6321fbc33e0c7c0a26b9aee5fc909df`, kernel only.
 Mac evidence: 39 execution tests (all E01–E13 plus boundary/causality cases),
 107 total workspace Rust tests, fmt, Clippy and WASM target compilation pass.
 The P1 parser/normalizer integration test consumes the existing synthetic fixture
 without changing P1. No new dependency, CLI command, WASM export or UI surface.
 WASM evidence is compilation only; browser/native-WASM financial parity NOT RUN.
+
+QOS-0010 prepares a [proposed SMA strategy contract](strategy-sma-v1-draft.md)
+and [invented cases](../fixtures/synthetic/sma-crossover-cases.md). Strategy
+choices are unapproved and unimplemented; it adds no public Rust/JSON signature,
+decoder or financial CLI/WASM/UI binding. A separate implementation card must
+lock that interface after review. Existing APIs remain authoritative and unchanged.

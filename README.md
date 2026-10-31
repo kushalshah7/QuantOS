@@ -11,13 +11,19 @@ ran on 2026-10-29: synthetic imports, all 68 Rust tests and web checks passed
 after an owner-approved test portability fix. The owner subsequently delegated
 approval to proceed within the scoped workflow; [D01–D12](docs/backtest-execution-v1-draft.md)
 were accepted through PR #8. [QOS-0009](docs/tasks/QOS-0009-P2-EXECUTION-KERNEL.md)
-implements a Rust-only provided-signal execution kernel, now under review in
-[PR #9](https://github.com/kushalshah7/QuantOS/pull/9). Its
+implements a Rust-only provided-signal execution kernel. The owner accepted
+head `6c4720566ea919eaf50221ccff0fc7e107c3eef3` on 2026-10-31;
+[PR #9](https://github.com/kushalshah7/QuantOS/pull/9) merged as
+`b4ee5eb9c6321fbc33e0c7c0a26b9aee5fc909df`. Its
 [typed API](docs/execution-api-v1.md) returns exact fills, accounting and atomic
 errors; all 107 Mac Rust tests pass, including 39 execution tests.
 The browser UI/WASM adapter still expose P0 surfaces. Strategy generation,
 financial CLI/browser bindings, charts, broker integration and deployment remain
 unimplemented; aggregate P2 acceptance is pending.
+[QOS-0010's SMA crossover draft](docs/strategy-sma-v1-draft.md) and
+[synthetic cases](fixtures/synthetic/sma-crossover-cases.md) propose the next
+strategy choices for review. They are documentation-only, with no approved
+strategy semantics or implementation.
 No market datasets or broker credentials belong here.
 
 Native CSV import is now available through `quantos-cli import`; see the
