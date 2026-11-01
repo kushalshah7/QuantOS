@@ -88,6 +88,88 @@ jobs:
           python3 -m json.tool .devcontainer/devcontainer.json > /dev/null
           bash -n .devcontainer/install-toolchains.sh
           bash -n .devcontainer/verify.sh
+      - name: Docker context isolation regression
+        run: |
+          python3 - <<'PY'
+          import os, subprocess, tempfile
+          from pathlib import Path
+
+          corrected = Path(".dockerignore").read_bytes()
+          allowed = {
+              ".devcontainer/Dockerfile",
+              ".devcontainer/install-toolchains.sh",
+              ".devcontainer/downloads.sha256",
+              "rust-toolchain.toml",
+              "package.json",
+          }
+          canaries = {
+              ".devcontainer/.env",
+              ".devcontainer/private/nested.txt",
+              ".devcontainer/notes.txt",
+              ".env",
+              "Market-Data/private.csv",
+              ".git/config",
+          }
+          # Original rules from dc95b505: reproduce the directory-wide exception.
+          original = ("**\n!.devcontainer/\n" +
+                      "".join("!" + name + "\n" for name in sorted(allowed))).encode()
+          payloads = {name: ("invented probe file: " + name + "\n").encode()
+                      for name in allowed | canaries}
+
+          def inspect(output):
+              entries = list(output.rglob("*"))
+              assert not any(p.is_symlink() for p in entries), "Unexpected symlink"
+              return {p.relative_to(output).as_posix(): p.read_bytes()
+                      for p in entries if p.is_file()}
+
+          def assert_isolated(files):
+              assert set(files) == allowed, (
+                  "COPY-visible set mismatch", sorted(set(files) - allowed),
+                  sorted(allowed - set(files)))
+              assert files == {name: payloads[name] for name in allowed}
+              assert canaries.isdisjoint(files)
+
+          with tempfile.TemporaryDirectory(prefix="quantos-context-") as temporary:
+              root = Path(temporary)
+              context = root / "context"
+              context.mkdir()
+              for name, content in payloads.items():
+                  path = context / name
+                  path.parent.mkdir(parents=True, exist_ok=True)
+                  path.write_bytes(content)
+
+              def probe(rules, label):
+                  (context / ".dockerignore").write_bytes(rules)
+                  output = root / (label + "-output")  # Outside the context.
+                  subprocess.run([
+                      "docker", "buildx", "build", "--progress=plain", "--no-cache",
+                      "--provenance=false", "--network=none", "--file", "-",
+                      "--output", "type=local,dest=" + str(output), str(context),
+                  ], input="FROM scratch\nCOPY . /\n", text=True, check=True,
+                     cwd=context, env={**os.environ, "BUILDX_GIT_INFO": "false"})
+                  assert output.is_dir(), "Build produced no local output"
+                  return inspect(output)
+
+              # Build failures propagate; they never count as successful exclusion.
+              leaked = probe(original, "original")
+              try:
+                  assert_isolated(leaked)
+              except AssertionError:
+                  expected_leaks = {name for name in canaries
+                                    if name.startswith(".devcontainer/")}
+                  assert set(leaked) == allowed | expected_leaks
+                  assert leaked == {name: payloads[name] for name in leaked}
+                  print("Original rules: build succeeded; same isolation assertion rejected "
+                        "exactly " + ", ".join(sorted(expected_leaks)), flush=True)
+              else:
+                  raise AssertionError("Regression failed to detect original exception")
+
+              assert_isolated(probe(corrected, "corrected"))
+              # Docker receives the ignore file and stdin Dockerfile as controls;
+              # they are not extra COPY-visible files in this exact-set assertion.
+              print("Corrected rules: build succeeded; exact five files and unchanged "
+                    "payloads; all six canaries absent: PASS", flush=True)
+          PY
       - name: Build the Codespaces development image
         run: docker build --file .devcontainer/Dockerfile --tag quantos-dev:ci .
       - name: Non-root environment and synthetic native CLI smoke

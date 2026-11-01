@@ -102,3 +102,36 @@ changes, unavailable free runner, or two materially different failed fixes.
 Do not switch to paid runners/services or waive failing checks. No merge,
 worker/systemd/cgroups, real-data processing, new strategy, phase acceptance,
 release or deployment. Return PR/SHA, checks and remaining review gates.
+
+## Authorized context-isolation correction — 2026-11-01
+
+The owner authorized fixing the P2 review finding in existing PR #12, starting
+at `dc95b5058a8a8a093ad8ecd881d3472ea4aa69ae` with the same exact develop base.
+This incremental work may edit only `.dockerignore`, the context regression step
+within `linux-devcontainer` in `.github/workflows/quality.yml`, this focused card
+section, and relevant isolation prose/evidence in `docs/linux.md`. The original
+work order and evidence remain historical; this boundary narrows its allowlist
+for this correction. One agent; PR #11 remains separate.
+
+- Remove the broad `!.devcontainer/` exception. Effective COPY-visible context
+  must contain only `.devcontainer/Dockerfile`,
+  `.devcontainer/install-toolchains.sh`, `.devcontainer/downloads.sha256`,
+  `rust-toolchain.toml` and `package.json`. Docker separately receives control
+  inputs; they do not add COPY-visible files to this allowlist.
+- Add an actual BuildKit `FROM scratch`/`COPY . /` probe with local output, using
+  a test-owned temporary context containing five invented positive stubs and
+  six canaries: `.devcontainer/.env`, `.devcontainer/private/nested.txt`,
+  `.devcontainer/notes.txt`, `.env`, `Market-Data/private.csv`, `.git/config`.
+  Only the checked-in ignore rules are copied from the public checkout.
+- Apply the same exact-set/payload assertion to successful probe builds under
+  the original and corrected rules. The original must be rejected for its three
+  unlisted `.devcontainer/` files; corrected output must contain exactly the five
+  intended files, byte-preserved, and none of the six canaries. A build failure
+  is a failed check. No pattern approximation substitutes for Docker execution.
+- Keep output outside the synthetic context and clean only test-owned temporary
+  paths. Retain existing image/CLI checks and all other jobs, pins and contracts.
+- Local syntax/text/scope checks only; Docker and runtime checks run in CI. All
+  four PR jobs must pass at the new final head; record actual logs in PR #12.
+  Stop for independent re-review, without merge or platform/phase acceptance.
+
+Correction evidence: pending fresh CI; no Docker/runtime checks run locally.

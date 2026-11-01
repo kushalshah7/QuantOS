@@ -53,9 +53,14 @@ installed. The non-root quantos user has two Cargo build jobs. Post-create check
 versions only; it does not install application dependencies, run suites, start a
 server or launch an agent. Ports are not made public.
 
-The Docker context is a positive allowlist of toolchain manifests and image setup.
-It excludes source, credentials, local edits, Market-Data/, results and synthetic
-CSV files. CI mounts the fresh public checkout read-only for the smoke check and
+The Docker context allows only `.devcontainer/Dockerfile`,
+`.devcontainer/install-toolchains.sh`, `.devcontainer/downloads.sha256`,
+`rust-toolchain.toml` and `package.json` as COPY inputs. The broad directory
+exception identified in PR #12 review is removed; no unlisted descendant of
+`.devcontainer/` is intended to be included. Docker separately transmits its
+control inputs, which are not additional COPY-visible files. Source, credentials,
+local edits, Market-Data/, results and synthetic CSV files remain excluded.
+CI mounts the fresh public checkout read-only for the smoke check and
 writes compilation output to a disposable container directory. No image/artifact
 is published.
 
@@ -106,6 +111,17 @@ second formatting job. New linux-devcontainer builds the Codespaces Dockerfile,
 checks the non-root environment and runs exact valid/rejected CLI imports.
 The new jobs run on PRs and pushes to main/develop, not duplicate feature pushes.
 All jobs retain contents: read and timeouts; no secrets or paid/larger runners.
+
+The owner-authorized context correction adds an actual BuildKit regression step
+inside `linux-devcontainer`. A disposable invented context contains five positive
+stubs plus six private-file canaries; a stdin `FROM scratch`/`COPY . /` probe
+exports to temporary directories outside that context. Both builds must succeed.
+The same exact-set/payload assertion must reject the original rules for including
+the three unlisted `.devcontainer/` canaries and pass the checked-in corrected
+rules with all six canaries absent. No private checkout contents are used; cleanup
+is limited to the probe's temporary root. This is Docker execution evidence,
+not a Git-ignore or glob simulation. Fresh correction CI evidence is pending;
+local Docker/runtime checks remain NOT RUN.
 
 Review requires all four jobs green at the final PR head, even though existing
 branch protection names are not changed automatically. Future task checks
