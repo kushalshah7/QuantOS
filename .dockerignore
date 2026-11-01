@@ -1,0 +1,8 @@
+# Positive allowlist: private inputs never enter the Docker build context.
+**
+!.devcontainer/
+!.devcontainer/Dockerfile
+!.devcontainer/install-toolchains.sh
+!.devcontainer/downloads.sha256
+!rust-toolchain.toml
+!package.json

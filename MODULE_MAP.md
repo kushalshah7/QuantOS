@@ -14,6 +14,7 @@ Open this before code exploration. Route to the **smallest** source area. Update
 | Independent math/data verification | `scripts/analytics/` | data/backtest contracts | Python test specified by task |
 | Future local private broker bridge | `services/local-bridge/` | explicit *future* broker spec | no live calls in default CI |
 | CI, release, hosting | `.github/workflows/`, hosting config | `DEVOPS_CICD.md` | GitHub Actions jobs / smoke tests |
+| Linux development / native CI | `.devcontainer/`, `.dockerignore`, `.github/workflows/quality.yml` | `docs/linux.md`, `docs/tasks/QOS-LINUX-001.md`, ADR 0003 | Existing x86 quality, native ARM64 Rust tests, container version/CLI smoke; Codespaces session separately verified |
 | Project governance | `AGENTS.md`, `CODEX_PROTOCOL.md`, `GIT_WORKFLOW.md`, `docs/tasks/` | task card + governance | PR review |
 
 **Boundary note:** Core now provides the Rust-only schema-1 `data::normalize_v1`

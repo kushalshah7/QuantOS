@@ -82,3 +82,21 @@ P0 is complete without a public deployment. P5 owns preview/production environme
 - Default to one Codex coding agent. Additional read-only reviewers may be explicitly requested for independent security/financial-correctness investigation. Subagents consume extra tokens and do not substitute for CI.
 - Keep CI outputs concise in handoffs: URLs, failing job names and a minimal relevant error excerpt, not full logs. Do not re-run green jobs just to generate reassuring transcripts.
 - No automatic merges, speculative dependency upgrades or out-of-phase deployments.
+
+## 8. Linux extension — QOS-LINUX-001
+
+The owner's 2026-11-01 directive makes Linux a first-class native development
+and execution platform without adding a mandatory backend. See
+[ADR 0003](docs/decisions/0003-linux-development-and-execution.md) and the
+[Linux plan](docs/linux.md). This task is infrastructure, not a phase acceptance.
+
+Keep required rust-quality/web-quality names and their existing checks. Pin
+Ubuntu 24.04; add native ARM64 Rust execution and a development-container smoke
+job. All four must pass for Linux-001 review. Extra jobs run on PRs/protected
+branch pushes only, use standard public free runners, and publish no artifacts.
+Do not change protection settings or merge automatically.
+
+Codespaces is optional interactive Linux development within verified included
+quota and no-paid-overage controls. No automatic creation/prebuild, paid runner,
+local VM requirement, private dataset upload, new service or deployment.
+Its interactive acceptance remains distinct from building the same image in CI.

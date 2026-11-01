@@ -1,5 +1,6 @@
 # Private inputs, credentials, and local results
 data/
+Market-Data/
 results/
 backtest-results/
 .env*

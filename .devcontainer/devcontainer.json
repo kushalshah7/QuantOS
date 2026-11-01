@@ -1,0 +1,14 @@
+{
+  "name": "QuantOS Linux",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "remoteUser": "quantos",
+  "containerUser": "quantos",
+  "hostRequirements": {
+    "cpus": 2
+  },
+  "postCreateCommand": "bash .devcontainer/verify.sh",
+  "shutdownAction": "stopContainer"
+}
