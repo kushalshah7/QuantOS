@@ -1,9 +1,12 @@
 # QOS-0010 — proposed SMA crossover contract and synthetic cases
 
-- **Status:** APPROVED FOR DOCUMENTATION PREPARATION ONLY by the owner's explicit
-  2026-10-31 request. Strategy choices remain PROPOSED and require review before
-  a separate implementation work order. Neither this PR's merge nor P2 acceptance
-  is authorized.
+- **Current status:** ACCEPTED. The owner approved SD01–SD10 and SC01–SC13 at
+  reviewed head `43a4577f25c41dcdbb60d9b6170355f683fef6ee` and separately
+  authorized PR #10's protected squash merge as
+  `fcd55862fac170c3326da5850b2b0e9c031c1274`. Exact-merge CI `41197152381`
+  passed Rust/web jobs. The original documentation-only work order and evidence
+  below are historical. Implementation is separately authorized by QOS-0011;
+  aggregate P2 acceptance remains pending.
 - **Phase:** P2 strategy specification preparation; one proposed SMA crossover.
 - **Branch:** `feature/qos-0010-sma-contract`; PR -> `develop`.
 - **Exact base:** `b4ee5eb9c6321fbc33e0c7c0a26b9aee5fc909df`, accepted PR #9
@@ -88,9 +91,11 @@ deployment or next task.
 
 ## Handoff
 
-- Status: DOCUMENTATION REVIEW in
-  [PR #10](https://github.com/kushalshah7/QuantOS/pull/10) to develop. All
-  SD01–SD10 strategy choices remain PROPOSED; review precedes implementation.
+- Current status: ACCEPTED and merged in
+  [PR #10](https://github.com/kushalshah7/QuantOS/pull/10), at the head/merge above.
+  SD01–SD10 and SC01–SC13 are approved as QOS-0011's basis. The receipts below
+  describe QOS-0010 preparation, which executed no strategy. Merge-handoff local
+  runtime checks were NOT RUN. No aggregate P2 acceptance.
 - Preflight PASS: PR #9 accepted head/merge match above; post-merge CI
   `41193789027` succeeded at the exact base with Rust/web jobs passing. Remote
   develop matches; no existing QOS-0010 task, branch, PR or output-path collision.

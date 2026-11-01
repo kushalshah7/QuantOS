@@ -6,10 +6,12 @@ Status: P1 data work is accepted. The owner accepted the bounded
 under the separate [locked Rust API](execution-api-v1.md). On 2026-10-31 the
 owner accepted QOS-0009 head `6c4720566ea919eaf50221ccff0fc7e107c3eef3`;
 PR #9 merged as `b4ee5eb9c6321fbc33e0c7c0a26b9aee5fc909df`, kernel only.
-[QOS-0010's SMA proposal](strategy-sma-v1-draft.md) is documentation-only and
-requires strategy review before implementation. The six inherited constraints
-below remain unchanged. Aggregate P2 acceptance, strategy generation, risk
-metrics and financial browser/WASM parity are pending.
+[QOS-0010's SMA contract](strategy-sma-v1-draft.md), SD01–SD10 and SC01–SC13,
+was accepted at `43a4577f25c41dcdbb60d9b6170355f683fef6ee` and merged as
+`fcd55862fac170c3326da5850b2b0e9c031c1274`. Separately authorized QOS-0011 adds
+the [Rust-only signal API](strategy-sma-api-v1.md), awaiting implementation review
+in PR #11. The six inherited constraints below remain unchanged. Aggregate P2
+acceptance, risk metrics and financial browser/WASM parity are pending.
 
 1. Signals observe completed candles only; a close-derived signal cannot fill
    before the next bar's open. Future tests must prove no same-candle lookahead.

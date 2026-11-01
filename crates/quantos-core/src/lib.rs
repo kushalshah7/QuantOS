@@ -1,7 +1,8 @@
-//! Shared foundation, approved data normalization and deterministic execution.
+//! Shared foundation, normalization, deterministic execution and SMA decisions.
 
 pub mod data;
 pub mod execution;
+pub mod sma;
 
 /// Describes the unchanged P0 build-stage surface; domain APIs are separate.
 pub const FOUNDATION_STATUS: &str = "QuantOS P0 foundation; market functionality unavailable";

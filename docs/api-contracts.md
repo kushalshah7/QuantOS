@@ -157,8 +157,23 @@ The P1 parser/normalizer integration test consumes the existing synthetic fixtur
 without changing P1. No new dependency, CLI command, WASM export or UI surface.
 WASM evidence is compilation only; browser/native-WASM financial parity NOT RUN.
 
-QOS-0010 prepares a [proposed SMA strategy contract](strategy-sma-v1-draft.md)
-and [invented cases](../fixtures/synthetic/sma-crossover-cases.md). Strategy
-choices are unapproved and unimplemented; it adds no public Rust/JSON signature,
-decoder or financial CLI/WASM/UI binding. A separate implementation card must
-lock that interface after review. Existing APIs remain authoritative and unchanged.
+## QOS-0011 Rust-only SMA signal API
+
+The owner accepted QOS-0010's [SD01–SD10 contract](strategy-sma-v1-draft.md) and
+[SC01–SC13 cases](../fixtures/synthetic/sma-crossover-cases.md) at
+`43a4577f25c41dcdbb60d9b6170355f683fef6ee`, merged as
+`fcd55862fac170c3326da5850b2b0e9c031c1274`. The separate
+[QOS-0011 card](tasks/QOS-0011-P2-SMA-STRATEGY.md) and
+[API lock](strategy-sma-api-v1.md) were pushed before implementation.
+
+`quantos_core::sma::generate_sma_v1(&SmaInputV1) -> SmaResultV1` now implements
+the contract for review in PR #11. It reuses existing candle, provenance,
+completion and decision types unchanged; validates the whole input; and returns
+preserved declarations plus one decision per candle, or a fixed atomic error.
+Checked u128 rolling sums and cross-products remain private. Strategy source
+never executes trades; kernel composition is test-only. There is no Deserialize,
+JSON decoder, new dependency or financial CLI/WASM/UI binding. Rust types prevent
+some semantic invalids from construction; runtime decoder coverage is not claimed.
+CI evidence belongs to the QOS-0011 handoff; local runtime checks are NOT RUN.
+Existing APIs remain authoritative. Aggregate P2 acceptance and browser financial
+parity remain pending.

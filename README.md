@@ -17,13 +17,18 @@ head `6c4720566ea919eaf50221ccff0fc7e107c3eef3` on 2026-10-31;
 `b4ee5eb9c6321fbc33e0c7c0a26b9aee5fc909df`. Its
 [typed API](docs/execution-api-v1.md) returns exact fills, accounting and atomic
 errors; all 107 Mac Rust tests pass, including 39 execution tests.
-The browser UI/WASM adapter still expose P0 surfaces. Strategy generation,
-financial CLI/browser bindings, charts, broker integration and deployment remain
-unimplemented; aggregate P2 acceptance is pending.
-[QOS-0010's SMA crossover draft](docs/strategy-sma-v1-draft.md) and
-[synthetic cases](fixtures/synthetic/sma-crossover-cases.md) propose the next
-strategy choices for review. They are documentation-only, with no approved
-strategy semantics or implementation.
+The owner accepted [QOS-0010's SD01–SD10 SMA contract](docs/strategy-sma-v1-draft.md)
+and [SC01–SC13 synthetic cases](fixtures/synthetic/sma-crossover-cases.md) at
+`43a4577f25c41dcdbb60d9b6170355f683fef6ee`; PR #10 merged as
+`fcd55862fac170c3326da5850b2b0e9c031c1274`. Separately authorized
+[QOS-0011](docs/tasks/QOS-0011-P2-SMA-STRATEGY.md) implements the
+[Rust-only SMA signal API](docs/strategy-sma-api-v1.md) for review in
+[PR #11](https://github.com/kushalshah7/QuantOS/pull/11). It generates exact
+completed-bar decisions; execution remains the existing kernel's responsibility.
+The browser UI/WASM adapter still expose P0 surfaces. Financial CLI/browser
+bindings, charts, broker integration and deployment remain unimplemented;
+aggregate P2 acceptance and browser financial parity are pending. QOS-0011 local
+runtime checks are NOT RUN; its handoff distinguishes CI from recorded Mac evidence.
 No market datasets or broker credentials belong here.
 
 Native CSV import is now available through `quantos-cli import`; see the
