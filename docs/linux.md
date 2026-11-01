@@ -120,8 +120,17 @@ The same exact-set/payload assertion must reject the original rules for includin
 the three unlisted `.devcontainer/` canaries and pass the checked-in corrected
 rules with all six canaries absent. No private checkout contents are used; cleanup
 is limited to the probe's temporary root. This is Docker execution evidence,
-not a Git-ignore or glob simulation. Fresh correction CI evidence is pending;
-local Docker/runtime checks remain NOT RUN.
+not a Git-ignore or glob simulation.
+
+At correction checkpoint `c4906a6a98071e57c6479d257877d8d6e77f0181`,
+[PR CI 41297639261](https://github.com/kushalshah7/QuantOS/actions/runs/41297639261)
+passed all four jobs. Inspected BuildKit logs show both successful exports:
+original rules failed the same isolation assertion for the three unlisted
+`.devcontainer/` canaries; corrected rules passed with exactly five byte-preserved
+files and all six canaries absent. Existing image/environment/CLI smoke also
+passed. The task card retains this checkpoint receipt; PR #12 records the fresh
+final-head evidence after the documentation handoff. Local Docker/runtime checks
+remain NOT RUN; independent re-review is required.
 
 Review requires all four jobs green at the final PR head, even though existing
 branch protection names are not changed automatically. Future task checks

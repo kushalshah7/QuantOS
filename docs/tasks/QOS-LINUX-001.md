@@ -134,4 +134,26 @@ for this correction. One agent; PR #11 remains separate.
   four PR jobs must pass at the new final head; record actual logs in PR #12.
   Stop for independent re-review, without merge or platform/phase acceptance.
 
-Correction evidence: pending fresh CI; no Docker/runtime checks run locally.
+Correction evidence at `c4906a6a98071e57c6479d257877d8d6e77f0181`:
+
+- [PR CI 41297639261](https://github.com/kushalshah7/QuantOS/actions/runs/41297639261)
+  passed all four jobs. Actual BuildKit output confirms both builds succeeded;
+  the same assertion rejected exactly `.devcontainer/.env`,
+  `.devcontainer/notes.txt` and `.devcontainer/private/nested.txt` under the
+  original rules. Corrected output contained exactly five byte-preserved files,
+  with all six canaries absent. Build failure was not used as exclusion evidence.
+- Existing development-image/non-root/version/valid-and-rejected CLI checks
+  passed. Native x86-64 and aarch64 each executed 107 Rust tests with zero
+  failures; fmt/Clippy/WASM compilation and web lint/typecheck/one test/build
+  passed. [Push CI 41297635643](https://github.com/kushalshah7/QuantOS/actions/runs/41297635643)
+  passed Rust/web jobs; added Linux jobs intentionally skipped on feature push.
+- Local PASS: shell/embedded-Python syntax, four-path boundary, unchanged other
+  jobs and pins, preserved original card, whitespace and sensitive-content
+  inspection. Local Docker, compilation, suites, product CLI and runtime checks:
+  NOT RUN. Only CI executed the probe and application checks.
+- PR #12 records the final documentation-head SHA and fresh final-head CI/logs
+  after the handoff push. The source checkpoint above is distinct from that
+  final-head evidence; original implementation receipts remain historical.
+- Independent re-review required. Codespaces interactive startup, ARM64
+  development-container execution, Mac runtime and browser financial parity
+  remain unverified. No merge, platform/phase acceptance or next task.
