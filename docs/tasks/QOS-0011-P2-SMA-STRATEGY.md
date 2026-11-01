@@ -120,3 +120,43 @@ does not prove browser financial parity. Local runtime checks remain NOT RUN.
   this SMA implementation. Browser/native-WASM financial runtime parity remains
   unverified; WASM compilation alone does not establish it. No known implementation
   blocker at handoff; owner review remains required.
+
+## Authorized accepted-Linux integration — 2026-11-01
+
+The owner explicitly authorized resuming QOS-0011 on its existing branch and
+PR #11 for integration and fresh CI verification only. Starting feature head:
+`e7a7c542115ad1878de50c4962c52ed9476a9c6a`. The original implementation base
+`fcd55862fac170c3326da5850b2b0e9c031c1274`, work order, source decisions and
+historical evidence above remain unchanged.
+
+- Integrate exactly accepted develop `81515e66449d2fde91d33b366c0435b696da6047`
+  using a normal merge commit on `feature/qos-0011-sma-strategy`. Preflight
+  verified the open PR/starting head/target, remote develop, and all four passing
+  jobs in exact post-merge CI
+  [41298982925](https://github.com/kushalshah7/QuantOS/actions/runs/41298982925).
+- This authorizes inheriting PR #12's accepted infrastructure paths despite the
+  original SMA prohibition on authoring CI changes. Preserve that infrastructure
+  exactly as accepted; preserve all SMA/runtime source/tests, APIs and financial
+  contracts exactly as at the starting feature head. MODULE_MAP.md must retain
+  both the SMA entry and the inherited Linux entry through the normal merge.
+- This appended integration/evidence section is the only additional manual edit.
+  No rebase, history rewrite, force push, additional PR, source/dependency fix or
+  infrastructure redesign. Stop on unexpected conflicts or required changes.
+- Reuse the clean isolated task worktree. Preserve the owner's execution-document
+  edit, Market-Data/, prompts and other tracked/untracked/ignored work; do not
+  inspect private datasets, stash, clean, overwrite or reset owner work.
+- Verify exact tree boundaries, shell/embedded-Python syntax and whitespace;
+  commit and immediately push coherent checkpoints. Local installations,
+  compilation, Docker builds, suites, product CLI, benchmarks and datasets remain
+  NOT RUN under LOW-RESOURCE mode.
+- Inspect fresh final-head PR CI/logs: rust-quality, web-quality, linux-arm64 and
+  linux-devcontainer must all pass. Confirm actual native Rust/SMA counts on both
+  architectures (expected baseline 132 total / 25 SMA, never a hardcoded test
+  assertion), Docker-context regression, image/CLI smoke and WASM compilation.
+- The integration SHA, integrated develop SHA, actual fresh CI receipts and
+  verification limits are recorded in PR #11's description; earlier receipts
+  above remain historical and cannot substitute for the integrated-head run.
+- Stop for independent source review. No merge into develop, SMA/aggregate P2
+  acceptance, Codespaces creation, billing change, worker, release, deployment
+  or new task. Interactive Codespaces startup, ARM64 development-container
+  execution, Mac runtime and browser financial parity remain unverified.
